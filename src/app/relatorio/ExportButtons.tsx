@@ -53,7 +53,7 @@ export function ExportButtons({
     doc.setFontSize(16);
     doc.text("Ilê Alaletu Axé Omim Odé Iboalamo", 14, 18);
     doc.setFontSize(13);
-    doc.text(`Relatório de Mensalidades — ${monthLabel}`, 14, 27);
+    doc.text(`Relatório de Mensalidades - ${monthLabel}`, 14, 27);
 
     doc.setFontSize(11);
     doc.text(`Total arrecadado: ${formatBRL(totalCents)}`, 14, 38);

@@ -44,7 +44,7 @@ export default async function ListaPage({
   return (
     <div className="max-w-3xl mx-auto px-4 py-6 flex flex-col gap-6">
       <h1 className="text-2xl font-extrabold text-verde-escuro">
-        Pagamentos — {monthLabel(year, month)}
+        Pagamentos - {monthLabel(year, month)}
       </h1>
 
       <MonthNav year={year} month={month} basePath="/pagamentos" />

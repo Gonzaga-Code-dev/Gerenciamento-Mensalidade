@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { extractPaymentsFromText } from "@/lib/aiExtract";
 
 /**
- * Integração automática com o WhatsApp Cloud API (Meta) — OPÇÃO 1 do escopo.
+ * Integração automática com o WhatsApp Cloud API (Meta) - OPÇÃO 1 do escopo.
  *
  * Esta rota fica inativa até que as variáveis de ambiente sejam configuradas:
  *   WHATSAPP_VERIFY_TOKEN, WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID

@@ -11,7 +11,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Ilê Alaletu Axé Omim Odé Iboalamo — Mensalidades",
+  title: "Ilê Alaletu Axé Omim Odé Iboalamo - Mensalidades",
   description: "Gestão de mensalidades do terreiro",
 };
 
