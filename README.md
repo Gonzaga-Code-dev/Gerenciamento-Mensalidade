@@ -62,14 +62,21 @@ Depois, entre em `/login` com o e-mail e senha definidos em `.env`.
    Variables* da Vercel: `DATABASE_URL`, `DIRECT_URL`, `SESSION_SECRET`
    (gere com `openssl rand -base64 48`), `ADMIN_NAME`, `ADMIN_EMAIL`,
    `ADMIN_PASSWORD` (veja a tabela abaixo).
-4. **Fazer o deploy.** O comando de build (`npm run build`) já roda
-   `prisma migrate deploy` antes do `next build`, então as tabelas são criadas
-   automaticamente no primeiro deploy.
-5. **Criar o usuário administrador.** Na sua máquina, rode
-   `vercel link` (uma vez) e depois `vercel env pull .env` para baixar as
-   variáveis de produção, e então `npm run db:seed`. Depois, acesse a URL
-   gerada pela Vercel e entre em `/login` com o `ADMIN_EMAIL`/`ADMIN_PASSWORD`
-   configurados.
+4. **Rodar as migrations e criar o usuário administrador.** O build da Vercel
+   **não** roda migrations (o servidor de build pode não ter acesso de rede ao
+   Postgres). Faça isso da sua própria máquina, que já tem acesso ao Supabase:
+   rode `vercel link` (uma vez), depois `vercel env pull .env` para baixar as
+   variáveis de produção, e então `npm run db:deploy` (aplica as migrations)
+   seguido de `npm run db:seed` (cria o admin).
+5. **Fazer o deploy.** `npx vercel --prod` (ou um `git push`, se o projeto
+   estiver conectado ao GitHub pelo dashboard da Vercel). Depois, acesse a URL
+   gerada e entre em `/login` com o `ADMIN_EMAIL`/`ADMIN_PASSWORD` configurados.
+
+> **Por que as migrations não rodam no build:** o ambiente de build da Vercel
+> às vezes não tem rota de rede até o Postgres (porta 5432/6543 bloqueada),
+> mesmo quando a mesma `DATABASE_URL` funciona perfeitamente de outra máquina.
+> Por isso `npm run build` só compila o Next.js — migrations e seed são
+> passos manuais, rodados de onde o banco realmente está acessível.
 
 ## Variáveis de ambiente / credenciais necessárias
 
@@ -93,7 +100,9 @@ Opcionais:
 
 - `npm run db:migrate` — cria uma nova migration a partir de mudanças no
   `prisma/schema.prisma` (uso local/desenvolvimento).
-- `npm run db:deploy` — aplica as migrations pendentes num banco existente
-  (é o que roda automaticamente no build da Vercel).
+- `npm run db:deploy` — aplica as migrations pendentes num banco existente.
+  Rode manualmente após cada mudança em `prisma/schema.prisma`, de uma
+  máquina com acesso à rede do Postgres (o build da Vercel **não** roda isso
+  automaticamente — veja a seção de deploy acima).
 - `npm run db:seed` — cria/atualiza o usuário administrador a partir de
   `ADMIN_NAME`/`ADMIN_EMAIL`/`ADMIN_PASSWORD`.
