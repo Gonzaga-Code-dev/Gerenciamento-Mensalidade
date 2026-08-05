@@ -94,7 +94,7 @@ export function parseWhatsappText(
 
     const amountIndex = line.search(/r\$|\d/i);
     let name = (amountIndex > 0 ? line.slice(0, amountIndex) : line)
-      .replace(/[-–:]+$/, "")
+      .replace(/[\s\-–:]+$/, "")
       .trim();
     if (!name) name = "Não identificado";
 

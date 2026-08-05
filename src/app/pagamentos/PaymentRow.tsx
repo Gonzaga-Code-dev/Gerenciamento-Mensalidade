@@ -138,9 +138,9 @@ export function PaymentRow({ payment }: { payment: PaymentRowData }) {
   return (
     <button
       onClick={() => setEditing(true)}
-      className="btn-grande w-full bg-white rounded-xl border border-cinza-escuro/10 px-4 py-3 flex items-center justify-between gap-3 hover:border-azul text-left"
+      className="btn-grande w-full bg-white rounded-xl border border-cinza-escuro/10 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 hover:border-azul text-left"
     >
-      <span className="font-semibold text-lg truncate">{payment.payerName}</span>
+      <span className="font-semibold text-lg break-words">{payment.payerName}</span>
       <span className="flex items-center gap-3 shrink-0">
         <span className="font-bold text-lg">{formatBRL(payment.amountCents)}</span>
         <StatusBadge status={payment.status} />

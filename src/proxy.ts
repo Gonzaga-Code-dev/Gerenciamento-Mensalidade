@@ -5,7 +5,7 @@ const SESSION_COOKIE = "terreiro_session";
 const PUBLIC_PATHS = ["/login"];
 const PUBLIC_API_PREFIXES = ["/api/auth", "/api/whatsapp/webhook"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
