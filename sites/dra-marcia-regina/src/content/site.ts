@@ -33,13 +33,6 @@ export const site = {
   ],
 };
 
-// Fotos: coloque os arquivos em public/fotos/ com estes nomes.
-// Enquanto não existirem, a página mostra um espaço reservado elegante.
-export const photos = {
-  portrait: "/fotos/marcia.webp", // retrato com fundo removido (WebP ou PNG transparente)
-  about: "/fotos/atendimento.jpg", // foto em atendimento ou do consultório
-};
-
 export const steps = [
   {
     n: "01",

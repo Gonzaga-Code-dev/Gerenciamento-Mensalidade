@@ -16,12 +16,9 @@ Transformar quem pesquisa o nome dela ou "tricologista em São Mateus" em
 conversa no WhatsApp para agendar uma avaliação capilar.
 
 ## Identidade
-- Referência aprovada pelo Hygor: topo verde-oliva profundo com dourado, foto da
-  profissional em destaque, serifa com trecho em itálico dourado, seções claras.
-- Paleta: oliva #3D4A35 / #2B3525, sálvia #8FA084, dourado #C9A66B, off-white #FAF8F5, areia.
+- Clínica premium, minimalista. Off-white #FAF8F5, areia/nude, verde-sálvia, grafite.
 - Cormorant Garamond (títulos) + Inter (corpo).
-- Fotos: `public/fotos/marcia.webp` (retrato, fundo removido) e
-  `public/fotos/atendimento.jpg`. Entram automaticamente no build.
+- Placeholders em textura, sem fotos reais.
 
 ## Regras (publicidade em saúde)
 Sem antes e depois, sem promessa de resultado, sem preços, sem depoimentos.
@@ -30,5 +27,5 @@ Sem antes e depois, sem promessa de resultado, sem preços, sem depoimentos.
 - [ ] Confirmar que o número é WhatsApp
 - [ ] Número do CRBM
 - [ ] Confirmar áreas de atendimento
-- [ ] Fotos originais (retrato e atendimento), baixadas do Google Maps ou enviadas por ela
+- [ ] Foto profissional (substitui a textura da seção Sobre)
 - [ ] Domínio; ao publicar oficialmente, remover o noindex (layout.tsx e robots.ts) e a faixa de prévia
