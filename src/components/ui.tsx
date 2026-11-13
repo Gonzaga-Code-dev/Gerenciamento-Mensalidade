@@ -1,76 +1,82 @@
-import { ButtonHTMLAttributes } from "react";
-import Link from "next/link";
+import type { ReactNode } from "react";
 
-type ButtonVariant = "primary" | "success" | "secondary" | "danger";
-
-const VARIANT_CLASSES: Record<ButtonVariant, string> = {
-  primary: "bg-azul text-white hover:bg-azul-escuro",
-  success: "bg-confirmado text-white hover:brightness-95",
-  secondary:
-    "bg-white text-cinza-escuro border-2 border-cinza-escuro/20 hover:bg-cinza-claro",
-  danger: "bg-white text-red-600 border-2 border-red-200 hover:bg-red-50",
-};
-
-export function buttonClasses(variant: ButtonVariant = "primary", className = "") {
-  return `btn-grande px-6 rounded-xl text-lg font-bold shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center ${VARIANT_CLASSES[variant]} ${className}`;
+export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return <div className={`mx-auto w-full max-w-6xl px-5 sm:px-8 ${className}`}>{children}</div>;
 }
 
-export function Button({
-  variant = "primary",
-  className = "",
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant }) {
-  return <button className={buttonClasses(variant, className)} {...props} />;
-}
-
-export function LinkButton({
-  href,
-  variant = "primary",
-  className = "",
+export function Section({
+  id,
   children,
+  className = "",
 }: {
-  href: string;
-  variant?: ButtonVariant;
+  id?: string;
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
 }) {
   return (
-    <Link href={href} className={buttonClasses(variant, className)}>
-      {children}
-    </Link>
+    <section id={id} className={`scroll-mt-20 border-t border-line py-20 sm:py-28 ${className}`}>
+      <Container>{children}</Container>
+    </section>
   );
 }
 
-export function Card({
-  children,
-  className = "",
+export function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">{children}</p>
+  );
+}
+
+export function SectionHeader({
+  eyebrow,
+  title,
+  text,
 }: {
-  children: React.ReactNode;
-  className?: string;
+  eyebrow: string;
+  title: string;
+  text?: string;
 }) {
   return (
-    <div
-      className={`bg-white rounded-2xl border border-cinza-escuro/10 shadow-sm p-5 sm:p-6 ${className}`}
-    >
-      {children}
+    <div className="max-w-2xl">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 className="mt-4 text-3xl font-medium tracking-tight text-balance sm:text-4xl">{title}</h2>
+      {text && <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{text}</p>}
     </div>
   );
 }
 
-const STATUS_CONFIG = {
-  CONFIRMADO: { label: "Confirmado", icon: "✓", fg: "text-confirmado", bg: "bg-confirmado-bg" },
-  PENDENTE: { label: "Pendente", icon: "⏳", fg: "text-pendente", bg: "bg-pendente-bg" },
-  CANCELADO: { label: "Cancelado", icon: "✕", fg: "text-cancelado", bg: "bg-cancelado-bg" },
-} as const;
+const buttonBase =
+  "inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-export function StatusBadge({ status }: { status: keyof typeof STATUS_CONFIG }) {
-  const config = STATUS_CONFIG[status];
+export function ButtonLink({
+  href,
+  children,
+  variant = "primary",
+  external = false,
+}: {
+  href: string;
+  children: ReactNode;
+  variant?: "primary" | "ghost";
+  external?: boolean;
+}) {
+  const styles =
+    variant === "primary"
+      ? "bg-accent text-accent-ink hover:bg-white"
+      : "border border-line text-text hover:border-muted";
   return (
-    <span
-      className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold ${config.fg} ${config.bg}`}
+    <a
+      href={href}
+      className={`${buttonBase} ${styles}`}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
-      <span aria-hidden>{config.icon}</span>
-      {config.label}
-    </span>
+      {children}
+    </a>
+  );
+}
+
+export function Arrow() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

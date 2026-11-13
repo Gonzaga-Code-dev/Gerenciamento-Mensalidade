@@ -1,31 +1,45 @@
-import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { site } from "@/content/site";
 import "./globals.css";
-import { getSession } from "@/lib/auth";
-import TopNav from "@/components/TopNav";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Ilê Alaletu Axé Omim Odé Iboalamo - Mensalidades",
-  description: "Gestão de mensalidades do terreiro",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} | Sites e landing pages para pequenas empresas`,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: site.url,
+    siteName: site.name,
+    title: `${site.name} | ${site.role}`,
+    description: site.description,
+  },
+  robots: { index: true, follow: true },
 };
 
-export default async function RootLayout({
+export const viewport: Viewport = {
+  themeColor: "#0a0a0b",
+};
+
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const session = await getSession();
-
   return (
-    <html lang="pt-BR" className={`${nunito.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-cinza-claro text-cinza-escuro">
-        {session && <TopNav userName={session.name} />}
-        <main className="flex-1 w-full">{children}</main>
-      </body>
+    <html
+      lang="pt-BR"
+      className={`${geist.variable} ${geistMono.variable} antialiased`}
+    >
+      <body className="min-h-screen font-sans">{children}</body>
     </html>
   );
 }
