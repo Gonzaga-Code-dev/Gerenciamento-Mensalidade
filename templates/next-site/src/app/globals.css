@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Paleta do site: troque estes tokens para cada cliente. */
+:root {
+  --bg: #ffffff;
+  --surface: #f6f6f4;
+  --line: #e6e6e3;
+  --text: #111111;
+  --muted: #6b6b6b;
+  --accent: #111111;
+  --accent-ink: #ffffff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-sans: var(--font-sans-loaded);
+  --font-mono: var(--font-mono-loaded);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

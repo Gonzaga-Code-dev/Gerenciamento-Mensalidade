@@ -1,37 +1,33 @@
-# Hygor Gonzaga · Sites e landing pages
+# Estúdio de sites · Hygor Gonzaga
 
-Site profissional para venda de criação de landing pages, sites institucionais e
-páginas de vendas para pequenas empresas e novos negócios.
+Todos os sites e páginas que eu crio, em um só lugar. Cada pasta em `sites/` é
+um projeto independente, com deploy e domínio próprios.
 
-Posicionamento: **tecnologia aplicada a negócios**.
-
-## Stack
-
-- Next.js 16 (App Router) + React 19
-- Tailwind CSS 4
-- Sem banco de dados: o formulário de orçamento monta a mensagem e abre o WhatsApp.
-
-## Editando o conteúdo
-
-Todos os textos, planos, preços, projetos, perguntas e contatos ficam em
-[`src/content/site.ts`](src/content/site.ts). Antes de publicar, revise os itens
-marcados com `TODO`:
-
-- `site.url`: domínio real
-- `site.whatsapp`: número no formato `55DDDNUMERO`
-- `site.instagram`: seu @
-- `projects`: troque os projetos "Conceito" pelos reais quando estiverem no ar
-- `plans`: confira os valores
-
-## Rodando localmente
+## Comandos (na raiz)
 
 ```bash
-npm install
-npm run dev
+npm install                        # instala tudo uma vez
+npm run new clinica-sorriso "Clínica Sorriso"   # cria um site novo
+npm run dev clinica-sorriso        # roda localmente em http://localhost:3000
+npm run build clinica-sorriso      # build de produção
+npm run list                       # lista os sites
 ```
 
-Acesse http://localhost:3000.
+## Pedindo um site ao Claude
 
-## Deploy
+Descreva o negócio, o objetivo da página e o que já tiver (textos, cores, logo,
+WhatsApp). O Claude cria `sites/<slug>`, preenche o `BRIEFING.md`, constrói o
+site, valida no celular e no desktop e faz o commit. O fluxo completo está em
+[`CLAUDE.md`](CLAUDE.md).
 
-Pronto para a Vercel: importe o repositório e faça o deploy, sem variáveis de ambiente.
+## Deploy na Vercel
+
+Para cada site: **Add New → Project**, escolha este repositório e defina o
+**Root Directory** como `sites/<slug>`. Cada site vira um projeto com domínio
+próprio.
+
+## Sites
+
+| Slug | Cliente | Tipo |
+| --- | --- | --- |
+| [`hygor-gonzaga`](sites/hygor-gonzaga) | Hygor Gonzaga | Site do serviço |
