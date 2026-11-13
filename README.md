@@ -31,3 +31,4 @@ próprio.
 | Slug | Cliente | Tipo |
 | --- | --- | --- |
 | [`hygor-gonzaga`](sites/hygor-gonzaga) | Hygor Gonzaga | Site do serviço |
+| [`dra-marcia-regina`](sites/dra-marcia-regina) | Dra. Márcia Regina | Landing page (prévia) |

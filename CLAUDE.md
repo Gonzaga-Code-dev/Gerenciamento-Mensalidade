@@ -55,3 +55,4 @@ precisa e o Claude entrega o site pronto, revisado e publicado na branch.
 | Slug | Cliente | Tipo | Status |
 | --- | --- | --- | --- |
 | `hygor-gonzaga` | Hygor Gonzaga (próprio) | Site do serviço | Revisar `TODO`s |
+| `dra-marcia-regina` | Dra. Márcia Regina (tricologista) | Landing page, prévia (noindex) | Aguardando pendências da cliente |
