@@ -1,9 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
@@ -34,14 +39,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf8f5",
+  themeColor: "#4f6352",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
-  name: site.name,
-  description: site.description,
+  name: `${site.name} — ${site.role}`,
+  description:
+    "Tricologista em São Mateus, Zona Leste de SP. Avaliação capilar individual para queda de cabelo, saúde dos fios e couro cabeludo.",
   telephone: site.phoneE164,
   address: {
     "@type": "PostalAddress",
@@ -67,14 +73,15 @@ const jsonLd = {
     },
   ],
   areaServed: "São Mateus, Zona Leste de São Paulo",
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: String(site.rating.count) },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${cormorant.variable} antialiased`}>
-      <body className="min-h-screen font-sans">
+    <html lang="pt-BR" className={`${jakarta.variable} ${cormorant.variable} antialiased`}>
+      <body className="min-h-screen bg-canvas font-sans text-graphite antialiased">
         {children}
         <script
           type="application/ld+json"

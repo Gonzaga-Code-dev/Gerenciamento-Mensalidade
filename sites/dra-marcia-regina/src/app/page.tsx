@@ -1,33 +1,48 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
+import FaqAccordion from "@/components/FaqAccordion";
 import Reveal from "@/components/Reveal";
-import { WhatsAppIcon } from "@/components/icons";
+import { ArrowUpRightIcon, ClockIcon, MapPinIcon, StarIcon, WhatsAppIcon } from "@/components/icons";
 import { areas, faq, site, steps } from "@/content/site";
 
-function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-[1120px] px-5 sm:px-8 ${className}`}>{children}</div>;
-}
+const container = "mx-auto max-w-6xl px-5 sm:px-8";
 
-function CtaButton({ children, variant = "dark" }: { children: ReactNode; variant?: "dark" | "light" }) {
-  const styles =
-    variant === "dark"
-      ? "bg-sage-deep text-white hover:bg-[#46543f]"
-      : "bg-white text-text hover:bg-bg";
+const primaryButton =
+  "inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-lg bg-sage py-3.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-sage-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage sm:w-auto sm:text-[15px]";
+
+function ClinicImage({
+  src,
+  alt,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
   return (
-    <a
-      href={site.whatsapp}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex min-h-12 shrink-0 items-center whitespace-nowrap justify-center gap-2.5 rounded-[3px] px-6 py-3 text-[15px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-deep ${styles}`}
-    >
-      <WhatsAppIcon className="size-[18px]" />
-      {children}
-    </a>
+    <figure className={`relative overflow-hidden rounded-xl border border-hairline/70 bg-image ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        width={1200}
+        height={896}
+        priority={priority}
+        sizes="(min-width: 1024px) 560px, 100vw"
+        className="h-full w-full object-cover object-center"
+      />
+    </figure>
   );
 }
 
-function SectionTitle({ children, className = "" }: { children: ReactNode; className?: string }) {
+function Kicker({ children }: { children: ReactNode }) {
+  return <p className="text-xs font-medium tracking-wide text-sage">{children}</p>;
+}
+
+function SectionTitle({ id, children, className = "" }: { id: string; children: ReactNode; className?: string }) {
   return (
-    <h2 className={`font-serif text-[2.1rem] font-medium leading-[1.1] text-balance sm:text-[2.75rem] ${className}`}>
+    <h2 id={id} className={`mt-3 text-balance text-3xl font-medium leading-tight text-graphite sm:text-4xl ${className}`}>
       {children}
     </h2>
   );
@@ -35,275 +50,349 @@ function SectionTitle({ children, className = "" }: { children: ReactNode; class
 
 const nav = [
   { label: "Sobre", href: "#sobre" },
-  { label: "Atendimento", href: "#atendimento" },
-  { label: "Dúvidas", href: "#duvidas" },
+  { label: "Como funciona", href: "#como-funciona" },
+  { label: "Atendimentos", href: "#atendimentos" },
   { label: "Localização", href: "#localizacao" },
 ];
 
 export default function Home() {
+  const year = new Date().getFullYear();
+
   return (
-    <>
-      {/* Faixa de prévia */}
-      <div className="fixed inset-x-0 top-0 z-50 bg-text px-4 py-[7px] text-center text-[11px] text-bg/80">
-        Prévia desenvolvida por <span className="text-bg">Gonzaga Code</span> para {site.name}
+    <div className="min-h-screen bg-canvas text-graphite">
+      {/* Faixa discreta fixa de prévia */}
+      <div
+        role="note"
+        aria-label="Aviso de prévia"
+        className="fixed inset-x-0 top-0 z-50 flex h-7 items-center justify-center border-b border-hairline bg-sand/95 px-4 text-center backdrop-blur-sm"
+      >
+        <p className="truncate text-[11px] font-medium tracking-wide text-muted">
+          Prévia desenvolvida por Gonzaga Code para {site.name}
+        </p>
       </div>
 
-      <header className="border-b border-line pt-[31px]">
-        <Container className="flex h-[72px] items-center justify-between gap-6">
-          <a href="#inicio" className="leading-tight">
-            <span className="block font-serif text-[22px] font-medium">{site.name}</span>
-            <span className="block text-[11px] text-muted">{site.role}</span>
+      {/* Cabeçalho */}
+      <header className="border-b border-hairline/80 bg-canvas pt-7">
+        <div className={`${container} flex items-center justify-between gap-8 py-4`}>
+          <a href="#inicio" className="shrink-0 whitespace-nowrap font-serif text-xl font-semibold tracking-tight sm:text-2xl">
+            {site.name}
           </a>
-          <nav aria-label="Principal" className="hidden lg:block">
-            <ul className="flex gap-8 text-sm text-muted">
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="transition-colors hover:text-text">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <nav aria-label="Navegação principal" className="hidden items-center gap-7 text-sm font-medium text-muted md:flex">
+            {nav.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="shrink-0 whitespace-nowrap transition-colors duration-150 hover:text-graphite hover:underline hover:underline-offset-4"
+              >
+                {n.label}
+              </a>
+            ))}
           </nav>
           <a
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-[3px] border border-text/80 px-4 py-2 text-sm transition-colors hover:bg-text hover:text-bg sm:inline-flex"
+            className="inline-flex min-h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-sage px-4 py-2 text-xs font-medium text-white transition-colors duration-150 hover:bg-sage-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage sm:text-sm"
           >
-            Agendar avaliação
+            Agendar
           </a>
-        </Container>
+        </div>
       </header>
 
       <main id="inicio">
         {/* 1. Hero */}
-        <section>
-          <Container className="grid gap-10 pb-14 pt-10 sm:pt-16 lg:grid-cols-12 lg:gap-12 lg:pb-20">
+        <section className={`${container} pb-16 pt-10 sm:pb-24 sm:pt-16 lg:pt-20`}>
+          <div className="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="flex flex-col justify-center lg:col-span-6">
-              <p className="flex items-center gap-2 text-[13px] text-muted">
-                <span className="tracking-[0.15em] text-[#b8932c]" aria-hidden="true">
-                  ★★★★★
-                </span>
-                <span>
-                  {site.rating.value} no Google · {site.rating.count} avaliações
-                </span>
-              </p>
-              <h1 className="mt-5 font-serif text-[3rem] font-medium leading-[1.02] sm:text-[4.25rem]">
-                Tricologia <span className="whitespace-nowrap">em São Mateus</span>
-              </h1>
-              <p className="mt-6 max-w-[30rem] text-[17px] leading-[1.7] text-muted">
-                Avaliação individual para entender a causa da queda de cabelo e definir o cuidado certo para os
-                seus fios e couro cabeludo.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-                <CtaButton>Agendar avaliação pelo WhatsApp</CtaButton>
-                <a href="#localizacao" className="whitespace-nowrap text-sm text-muted underline decoration-line underline-offset-[6px] hover:text-text hover:decoration-text">
-                  Ver endereço e horários
-                </a>
+              <div className="mb-5 flex items-center gap-2 text-xs font-medium text-muted sm:text-sm">
+                <StarIcon className="size-3.5 text-sage" />
+                <span className="tabular-nums">{site.rating.value} no Google</span>
+                <span aria-hidden="true">·</span>
+                <span className="tabular-nums">{site.rating.count} avaliações</span>
               </div>
-              <p className="mt-10 border-t border-line pt-5 text-sm text-muted">
-                <span className="text-text">{site.name}</span> · {site.role}
-              </p>
-            </div>
-            <div className="lg:col-span-6">
-              <div className="photo aspect-[4/3] w-full sm:aspect-[16/11] lg:aspect-[5/6]" role="img" aria-label="Espaço reservado para foto do consultório" />
-            </div>
-          </Container>
 
-          {/* Informações práticas */}
-          <div className="border-y border-line bg-surface">
-            <Container className="grid divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-              <div className="py-5 sm:pr-8">
-                <p className="text-xs text-muted">Endereço</p>
-                <p className="mt-1 text-[15px]">
-                  {site.address.street.replace(" – Sala 01", "")}, {site.address.district}
+              <h1 className="max-w-xl text-balance text-[clamp(2.35rem,5vw,3.85rem)] font-medium leading-[1.06] tracking-tight">
+                Tricologia em São Mateus
+              </h1>
+
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+                Avaliação individual para entender a causa da queda de cabelo e definir o cuidado certo para os seus fios
+                e couro cabeludo.
+              </p>
+
+              <div className="mt-8 flex flex-col items-start gap-4">
+                <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className={`${primaryButton} px-7`}>
+                  <WhatsAppIcon className="size-4 shrink-0" />
+                  <span>Agendar avaliação pelo WhatsApp</span>
+                </a>
+                <p className="text-sm text-muted">
+                  {site.name} <span aria-hidden="true">·</span> {site.role}
                 </p>
               </div>
-              <div className="py-5 sm:px-8">
-                <p className="text-xs text-muted">Horário</p>
-                <p className="mt-1 text-[15px]">Seg a sex 9h–18h · Sáb 9h–16h</p>
-              </div>
-              <div className="py-5 sm:pl-8">
-                <p className="text-xs text-muted">Agendamento</p>
-                <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="mt-1 block text-[15px] hover:text-sage-deep">
-                  WhatsApp {site.phone.replace("+55 ", "")}
-                </a>
-              </div>
-            </Container>
+            </div>
+
+            <div className="lg:col-span-6">
+              <ClinicImage
+                src="/images/hero.webp"
+                alt="Composição minimalista em pedra travertino, linho claro e ramo de eucalipto sob luz natural"
+                priority
+                className="aspect-[4/3] h-full w-full"
+              />
+            </div>
           </div>
         </section>
 
         {/* 2. Sobre */}
-        <section id="sobre" className="scroll-mt-10 py-20 sm:py-28">
-          <Container className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
-            <div data-reveal className="lg:col-span-5">
-              <div className="photo photo-sage aspect-[4/5] w-full" role="img" aria-label="Espaço reservado para foto da Dra. Márcia Regina" />
-              <p className="mt-3 text-xs text-muted">Espaço para foto da profissional</p>
+        <section
+          id="sobre"
+          data-reveal
+          aria-labelledby="sobre-titulo"
+          className="border-t border-hairline/80 bg-sand/55 py-16 sm:py-24"
+        >
+          <div className={`${container} grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16`}>
+            <div className="order-2 lg:order-1 lg:col-span-5">
+              <ClinicImage
+                src="/images/sobre.webp"
+                alt="Detalhe de ambiente clínico minimalista em tons areia, pedra natural e cerâmica verde-sálvia"
+                className="aspect-[4/3] w-full"
+              />
             </div>
-            <div data-reveal className="lg:col-span-6 lg:col-start-7 lg:pt-10">
-              <SectionTitle>Cuidado que começa por entender você</SectionTitle>
-              <p className="mt-6 text-[17px] leading-[1.75] text-muted">
-                A {site.name} é biomédica esteta com atuação em tricologia, a área que estuda a saúde dos cabelos
-                e do couro cabeludo. Cada atendimento começa com uma avaliação detalhada, com tempo para ouvir,
-                explicar e esclarecer cada etapa do tratamento.
+            <div className="order-1 lg:order-2 lg:col-span-7">
+              <Kicker>Sobre o atendimento</Kicker>
+              <SectionTitle id="sobre-titulo" className="max-w-xl">
+                Cuidado que começa por entender você
+              </SectionTitle>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-[17px]">
+                A {site.name} é biomédica esteta com atuação em tricologia, a área que estuda a saúde dos cabelos e do
+                couro cabeludo. Cada atendimento começa com uma avaliação detalhada, com tempo para ouvir, explicar e
+                esclarecer cada etapa do tratamento.
               </p>
-              <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-line pt-6 text-sm">
-                <div>
-                  <dt className="text-muted">Formação</dt>
-                  <dd className="mt-1">Biomédica Esteta</dd>
-                </div>
-                <div>
-                  <dt className="text-muted">Registro</dt>
-                  <dd className="mt-1">CRBM {site.crbm}</dd>
-                </div>
-              </dl>
+              <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-hairline pt-6 text-sm text-muted">
+                <span>Escuta individualizada</span>
+                <span aria-hidden="true">·</span>
+                <span>Explicação clara em cada etapa</span>
+                <span aria-hidden="true">·</span>
+                <span>São Mateus, Zona Leste</span>
+              </div>
             </div>
-          </Container>
+          </div>
         </section>
 
         {/* 3. Como funciona */}
-        <section className="border-t border-line bg-surface py-20 sm:py-28">
-          <Container>
-            <SectionTitle className="max-w-md">Como funciona o atendimento</SectionTitle>
-            <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-10">
-              {steps.map((s, i) => (
-                <li key={s.n} data-reveal style={{ ["--delay" as string]: `${i * 100}ms` }} className="border-t border-text/70 pt-5">
-                  <p className="text-sm tabular-nums text-sage-deep">{s.n}</p>
-                  <h3 className="mt-3 font-serif text-2xl font-medium">{s.title}</h3>
-                  <p className="mt-3 leading-[1.7] text-muted">{s.text}</p>
-                </li>
+        <section
+          id="como-funciona"
+          data-reveal
+          aria-labelledby="como-funciona-titulo"
+          className="border-t border-hairline/80 py-16 sm:py-24"
+        >
+          <div className={container}>
+            <div className="max-w-xl">
+              <Kicker>Como funciona</Kicker>
+              <SectionTitle id="como-funciona-titulo">
+                Um processo claro, do primeiro contato ao acompanhamento
+              </SectionTitle>
+            </div>
+            <div className="mt-12 grid grid-cols-1 gap-8 border-t border-hairline pt-10 md:grid-cols-3 md:gap-10">
+              {steps.map((step) => (
+                <article key={step.n} className="flex flex-col">
+                  <span className="font-serif text-3xl font-normal tabular-nums text-sage">{step.n}</span>
+                  <h3 className="mt-3 text-2xl font-medium">{step.title}</h3>
+                  <p className="mt-2.5 text-[15px] leading-relaxed text-muted">{step.text}</p>
+                </article>
               ))}
-            </ol>
-          </Container>
+            </div>
+          </div>
         </section>
 
         {/* 4. Áreas de atendimento */}
-        <section id="atendimento" className="scroll-mt-10 py-20 sm:py-28">
-          <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <div data-reveal className="lg:col-span-5">
-              <SectionTitle>Áreas de atendimento</SectionTitle>
-              <p className="mt-5 max-w-sm leading-[1.7] text-muted">
-                Cuidado com a saúde dos fios, do couro cabeludo e da pele, sempre a partir de uma avaliação.
+        <section
+          id="atendimentos"
+          data-reveal
+          aria-labelledby="atendimentos-titulo"
+          className="border-t border-hairline/80 bg-sand/55 py-16 sm:py-24"
+        >
+          <div className={`${container} grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-14`}>
+            <div className="lg:col-span-5">
+              <Kicker>Áreas de atendimento</Kicker>
+              <SectionTitle id="atendimentos-titulo">Atenção dedicada à saúde capilar e estética</SectionTitle>
+              <p className="mt-4 text-[15px] leading-relaxed text-muted sm:text-base">
+                As condutas são definidas presencialmente após a avaliação individual, considerando o histórico e os
+                objetivos de cada pessoa.
               </p>
+              <ClinicImage
+                src="/images/cuidado.webp"
+                alt="Frasco de vidro fosco sobre pedra natural em tons neutros suaves"
+                className="mt-8 aspect-[4/3] w-full"
+              />
             </div>
-            <ul data-reveal className="border-t border-line lg:col-span-7">
-              {areas.map((a, i) => (
-                <li key={a} className="flex items-baseline gap-6 border-b border-line py-5">
-                  <span className="w-6 text-sm tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-[17px]">{a}</span>
-                </li>
-              ))}
-            </ul>
-          </Container>
+            <div className="lg:col-span-7">
+              <div className="divide-y divide-hairline border-y border-hairline">
+                {areas.map((area, idx) => (
+                  <div key={area.title} className="py-6 sm:py-7">
+                    <div className="flex items-baseline gap-4">
+                      <span className="text-xs font-medium tabular-nums text-sage">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="text-2xl font-medium">{area.title}</h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-muted">{area.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* 5. Perguntas frequentes */}
-        <section id="duvidas" className="scroll-mt-10 border-t border-line py-20 sm:py-28">
-          <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <div data-reveal className="lg:col-span-5">
-              <SectionTitle>Perguntas frequentes</SectionTitle>
+        <section
+          id="duvidas"
+          data-reveal
+          aria-labelledby="duvidas-titulo"
+          className="border-t border-hairline/80 py-16 sm:py-24"
+        >
+          <div className={`${container} grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14`}>
+            <div className="lg:col-span-4">
+              <Kicker>Perguntas frequentes</Kicker>
+              <SectionTitle id="duvidas-titulo">Dúvidas comuns antes da consulta</SectionTitle>
+              <p className="mt-4 text-[15px] leading-relaxed text-muted">
+                Se preferir tirar alguma dúvida antes de agendar, você pode conversar diretamente com a clínica pelo
+                WhatsApp.
+              </p>
             </div>
-            <div data-reveal className="border-t border-line lg:col-span-7">
-              {faq.map((item) => (
-                <details key={item.q} className="group border-b border-line">
-                  <summary className="flex min-h-16 cursor-pointer items-center justify-between gap-6 py-5 text-[17px]">
-                    {item.q}
-                    <svg
-                      viewBox="0 0 16 16"
-                      className="size-4 shrink-0 text-muted transition-transform duration-300 group-open:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      aria-hidden="true"
-                    >
-                      <path d="M3.5 6l4.5 4.5L12.5 6" />
-                    </svg>
-                  </summary>
-                  <p className="max-w-xl pb-6 leading-[1.7] text-muted">{item.a}</p>
-                </details>
-              ))}
+            <div className="lg:col-span-8">
+              <FaqAccordion items={faq} />
             </div>
-          </Container>
+          </div>
         </section>
 
         {/* 6. Localização */}
-        <section id="localizacao" className="scroll-mt-10 border-t border-line bg-surface py-20 sm:py-28">
-          <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <div data-reveal className="lg:col-span-5">
-              <SectionTitle>Localização e horários</SectionTitle>
-              <address className="mt-8 not-italic leading-[1.8]">
-                {site.address.street}
-                <br />
-                {site.address.district}, {site.address.city} – {site.address.state}
-                <br />
-                CEP {site.address.zip}
-              </address>
-              <dl className="mt-8 border-t border-line text-[15px]">
-                {site.hours.map((h) => (
-                  <div key={h.days} className="flex justify-between border-b border-line py-3">
-                    <dt className="text-muted">{h.days}</dt>
-                    <dd className={h.time === "Fechado" ? "text-muted" : ""}>{h.time}</dd>
+        <section
+          id="localizacao"
+          data-reveal
+          aria-labelledby="localizacao-titulo"
+          className="border-t border-hairline/80 bg-sand/55 py-16 sm:py-24"
+        >
+          <div className={`${container} grid grid-cols-1 items-stretch gap-10 lg:grid-cols-12 lg:gap-12`}>
+            <div className="flex flex-col justify-between lg:col-span-5">
+              <div>
+                <Kicker>Localização</Kicker>
+                <SectionTitle id="localizacao-titulo">Atendimento em São Mateus</SectionTitle>
+
+                <div className="mt-8 space-y-6 border-t border-hairline pt-6">
+                  <div className="flex items-start gap-3.5">
+                    <MapPinIcon className="mt-0.5 size-5 shrink-0 text-sage" />
+                    <div>
+                      <p className="text-sm font-medium">Endereço</p>
+                      <p className="mt-1 text-[15px] leading-relaxed text-muted">
+                        {site.address.street}
+                        <br />
+                        {site.address.district}, {site.address.city} – {site.address.state}, {site.address.zip}
+                      </p>
+                    </div>
                   </div>
-                ))}
-              </dl>
-              <a
-                href={site.mapLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 inline-flex min-h-12 items-center rounded-[3px] border border-text/80 px-6 py-3 text-[15px] transition-colors hover:bg-text hover:text-bg"
-              >
-                Como chegar
-              </a>
+
+                  <div className="flex items-start gap-3.5">
+                    <ClockIcon className="mt-0.5 size-5 shrink-0 text-sage" />
+                    <div>
+                      <p className="text-sm font-medium">Horários de atendimento</p>
+                      <p className="mt-1 text-[15px] leading-relaxed tabular-nums text-muted">
+                        Segunda a sexta: 9h–18h
+                        <br />
+                        Sábado: 9h–16h
+                        <br />
+                        Domingo: fechado
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href={site.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-sage px-6 py-2.5 text-sm font-medium text-sage transition-colors duration-150 hover:bg-sage hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage"
+                >
+                  <span>Como chegar</span>
+                  <ArrowUpRightIcon className="size-4 shrink-0" />
+                </a>
+              </div>
             </div>
-            <div data-reveal className="border border-line bg-sand lg:col-span-7">
-              <iframe
-                src={site.mapEmbed}
-                title={`Mapa: ${site.address.street}, ${site.address.district}`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block h-80 w-full sm:h-full sm:min-h-[460px]"
-              />
+
+            <div className="lg:col-span-7">
+              <div className="h-[300px] w-full overflow-hidden rounded-xl border border-hairline bg-image sm:h-[360px] lg:h-full lg:min-h-[380px]">
+                <iframe
+                  title={`Mapa com a localização da clínica ${site.name} em São Mateus`}
+                  src={site.mapEmbed}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full border-0"
+                  allowFullScreen
+                />
+              </div>
             </div>
-          </Container>
+          </div>
         </section>
 
         {/* 7. CTA final */}
-        <section className="bg-sage-deep text-white">
-          <Container className="flex flex-col gap-8 py-16 sm:py-20 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="max-w-2xl font-serif text-[2.1rem] font-medium leading-[1.1] text-balance sm:text-[2.75rem]">
+        <section data-reveal aria-labelledby="cta-final-titulo" className="border-t border-hairline/80 py-20 sm:py-28">
+          <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
+            <h2
+              id="cta-final-titulo"
+              className="mx-auto max-w-2xl text-balance text-3xl font-medium leading-tight sm:text-5xl"
+            >
               Cuide da saúde dos seus fios com quem entende do assunto
             </h2>
-            <div className="shrink-0">
-              <CtaButton variant="light">Agendar avaliação</CtaButton>
+            <div className="mt-8 flex justify-center">
+              <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className={`${primaryButton} px-8`}>
+                <WhatsAppIcon className="size-4 shrink-0" />
+                <span>Agendar avaliação</span>
+              </a>
             </div>
-          </Container>
+          </div>
         </section>
       </main>
 
       {/* 8. Rodapé */}
-      <footer className="pb-28 pt-14 text-sm text-muted md:pb-14">
-        <Container className="grid gap-8 sm:grid-cols-3">
-          <div>
-            <p className="font-serif text-xl font-medium text-text">{site.name}</p>
-            <p className="mt-1">{site.role}</p>
-            <p>CRBM {site.crbm}</p>
+      <footer className="border-t border-hairline bg-sand/70 pb-24 pt-12 md:pb-12">
+        <div className={container}>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div>
+              <p className="font-serif text-2xl font-medium">{site.name}</p>
+              <p className="mt-1.5 text-sm text-muted">{site.role}</p>
+              <p className="mt-1 text-sm text-muted">CRBM {site.crbm}</p>
+            </div>
+            <div>
+              <p className="text-sm font-medium">Consultório</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                {site.address.street}
+                <br />
+                {site.address.district}, {site.address.city} – {site.address.state}, {site.address.zip}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm font-medium">Contato</p>
+              <a
+                href={site.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1.5 inline-flex min-h-10 items-center gap-2 text-sm tabular-nums text-sage underline-offset-4 hover:underline"
+              >
+                <WhatsAppIcon className="size-4 shrink-0" />
+                <span>{site.phone}</span>
+              </a>
+            </div>
           </div>
-          <div>
-            <p className="text-text">Endereço</p>
-            <p className="mt-1">{site.address.street}</p>
+          <div className="mt-10 flex flex-col items-start justify-between gap-2 border-t border-hairline pt-6 text-xs text-muted sm:flex-row sm:items-center">
             <p>
-              {site.address.district}, {site.address.city} – {site.address.state}, {site.address.zip}
+              © {year} {site.name}. Todos os direitos reservados.
             </p>
+            <p>Desenvolvido por Gonzaga Code</p>
           </div>
-          <div>
-            <p className="text-text">Contato</p>
-            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="mt-1 block hover:text-text">
-              WhatsApp {site.phone}
-            </a>
-          </div>
-        </Container>
-        <Container className="mt-12 border-t border-line pt-6 text-xs">Desenvolvido por Gonzaga Code</Container>
+        </div>
       </footer>
 
       {/* Botão flutuante de WhatsApp (mobile) */}
@@ -312,12 +401,13 @@ export default function Home() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Agendar avaliação pelo WhatsApp"
-        className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-5 z-40 grid size-14 place-items-center rounded-full bg-[#25d366] text-white shadow-[0_6px_20px_-6px_rgba(0,0,0,0.35)] transition-transform active:scale-95 md:hidden"
+        className="fixed bottom-4 right-4 z-40 inline-flex h-12 items-center gap-2 rounded-full bg-sage px-5 text-sm font-medium text-white shadow-lg shadow-graphite/15 transition-transform duration-150 hover:bg-sage-hover active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage md:hidden"
       >
-        <WhatsAppIcon className="size-7" />
+        <WhatsAppIcon className="size-5 shrink-0" />
+        <span className="whitespace-nowrap">WhatsApp</span>
       </a>
 
       <Reveal />
-    </>
+    </div>
   );
 }

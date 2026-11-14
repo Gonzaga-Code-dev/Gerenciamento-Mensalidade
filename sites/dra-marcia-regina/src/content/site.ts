@@ -25,7 +25,7 @@ export const site = {
   mapEmbed:
     "https://www.google.com/maps?q=Av.+Mateo+Bei,+2344,+S%C3%A3o+Mateus,+S%C3%A3o+Paulo&output=embed",
   mapLink:
-    "https://www.google.com/maps/search/?api=1&query=Av.+Mateo+Bei,+2344,+S%C3%A3o+Mateus,+S%C3%A3o+Paulo+-+SP",
+    "https://www.google.com/maps/search/?api=1&query=Av.+Mateo+Bei,+2344,+S%C3%A3o+Mateus,+S%C3%A3o+Paulo+-+SP,+03949-200",
   hours: [
     { days: "Segunda a sexta", time: "9h às 18h" },
     { days: "Sábado", time: "9h às 16h" },
@@ -53,10 +53,22 @@ export const steps = [
 
 // TODO: confirmar áreas de atendimento com a cliente.
 export const areas = [
-  "Avaliação e diagnóstico capilar",
-  "Tratamento para queda de cabelo e alopecia",
-  "Terapias aplicadas no couro cabeludo",
-  "Cuidados com a pele",
+  {
+    title: "Avaliação e diagnóstico capilar",
+    text: "Investigação minuciosa do couro cabeludo e da haste capilar para compreender a origem das alterações nos fios.",
+  },
+  {
+    title: "Tratamento para queda de cabelo e alopecia",
+    text: "Condutas individualizadas conforme o tipo de queda, respeitando o momento clínico e as necessidades de cada paciente.",
+  },
+  {
+    title: "Terapias aplicadas no couro cabeludo",
+    text: "Procedimentos realizados em consultório com foco no equilíbrio e na vitalidade do couro cabeludo.",
+  },
+  {
+    title: "Cuidados com a pele",
+    text: "Atendimento estético complementar conduzido com critério biomédico, respeitando a saúde e a naturalidade da pele.",
+  },
 ];
 
 export const faq = [

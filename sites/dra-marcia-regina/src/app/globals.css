@@ -1,31 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #faf8f5;
-  --surface: #f3eee7;
-  --sand: #e8ddd0;
-  --nude: #d8c5b3;
-  --line: #e6ded3;
-  --text: #2a2a28;
-  --muted: #67625b;
-  --sage: #9aab92;
-  --sage-soft: #e3e9df;
-  --sage-deep: #55654e;
+  --bg-canvas: #faf8f5;
+  --bg-sand: #f2ece4;
+  --bg-sand-deep: #e8dfd3;
+  --bg-image: #efe8de;
+  --border-hairline: #dfd5c8;
+  --text-graphite: #262826;
+  --text-muted: #575a56;
+  --accent-sage: #4f6352;
+  --accent-sage-hover: #3f5142;
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-sand: var(--sand);
-  --color-nude: var(--nude);
-  --color-line: var(--line);
-  --color-text: var(--text);
-  --color-muted: var(--muted);
-  --color-sage: var(--sage);
-  --color-sage-soft: var(--sage-soft);
-  --color-sage-deep: var(--sage-deep);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
+  --color-canvas: var(--bg-canvas);
+  --color-sand: var(--bg-sand);
+  --color-sand-deep: var(--bg-sand-deep);
+  --color-image: var(--bg-image);
+  --color-hairline: var(--border-hairline);
+  --color-graphite: var(--text-graphite);
+  --color-muted: var(--text-muted);
+  --color-sage: var(--accent-sage);
+  --color-sage-hover: var(--accent-sage-hover);
+  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
 }
 
 html {
@@ -34,47 +32,28 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg-canvas);
+  color: var(--text-graphite);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
 }
 
 ::selection {
-  background: var(--sage-soft);
-}
-
-details > summary {
-  list-style: none;
-}
-details > summary::-webkit-details-marker {
-  display: none;
-}
-
-/* Placeholder de foto: tom liso com granulação leve */
-.photo {
-  position: relative;
-  background-color: var(--sand);
-  overflow: hidden;
-}
-.photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .48 0 0 0 0 .42 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.photo-sage {
-  background-color: #d5ddd0;
+  background: rgb(79 99 82 / 0.15);
+  color: var(--text-graphite);
 }
 
 /* Entrada sutil ao rolar: só esconde se o JS estiver ativo */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(16px);
   transition:
-    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-  transition-delay: var(--delay, 0ms);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .js [data-reveal].is-visible {
   opacity: 1;

@@ -16,9 +16,10 @@ Transformar quem pesquisa o nome dela ou "tricologista em São Mateus" em
 conversa no WhatsApp para agendar uma avaliação capilar.
 
 ## Identidade
-- Clínica premium, minimalista. Off-white #FAF8F5, areia/nude, verde-sálvia, grafite.
-- Cormorant Garamond (títulos) + Inter (corpo).
-- Placeholders em textura, sem fotos reais.
+- Design aprovado pelo Hygor (projeto de referência enviado em zip): editorial claro,
+  off-white #FAF8F5, areia #F2ECE4, verde-sálvia #4F6352, grafite #262826.
+- Cormorant Garamond (títulos) + Plus Jakarta Sans (corpo).
+- Imagens de textura (pedra, linho, eucalipto) em `public/images/`, sem fotos da cliente.
 
 ## Regras (publicidade em saúde)
 Sem antes e depois, sem promessa de resultado, sem preços, sem depoimentos.
