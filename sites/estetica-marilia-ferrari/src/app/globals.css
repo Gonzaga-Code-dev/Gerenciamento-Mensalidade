@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #fbf6f1;
+  --surface: #f4eae1;
+  --line: #e8dacd;
+  --text: #2e2420;
+  --muted: #6e5f57;
+  --clay: #a0573f;
+  --clay-deep: #8a4733;
+  --blush: #ebcdbe;
+  --cocoa: #2e2420;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-blush: var(--blush);
+  --color-cocoa: var(--cocoa);
+  --font-sans: var(--font-dm), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+::selection {
+  background: var(--blush);
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Painel de luz suave, no lugar de foto */
+.glow {
+  background:
+    radial-gradient(60% 80% at 25% 30%, #f7e4d8 0%, transparent 70%),
+    radial-gradient(50% 70% at 80% 70%, #e3b8a3 0%, transparent 70%),
+    linear-gradient(135deg, #f1ddd0 0%, #e6c4b2 100%);
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
