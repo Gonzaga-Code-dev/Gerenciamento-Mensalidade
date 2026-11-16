@@ -10,9 +10,10 @@ const message = encodeURIComponent("Olá! Vim pelo site e quero fazer um pedido.
 
 export const site = {
   name: "Racha Burger",
-  title: "Racha Burger | Hambúrguer na Vila Santo Antônio – SP",
+  tagline: "Hambúrguer artesanal",
+  title: "Racha Burger | Hambúrguer artesanal na Vila Santo Antônio – SP",
   description:
-    "Hamburgueria na Vila Santo Antônio, região do Grajaú, com nota 5,0 no Google. Veja o cardápio e peça pelo WhatsApp.",
+    "Hambúrguer artesanal na Vila Santo Antônio, Zona Sul de SP. Burgers com nomes de circuitos do mundo, nota 5,0 no Google. Peça pelo WhatsApp.",
   rating: { value: "5,0", count: 231 },
   priceRange: "R$ 20 a 40 por pessoa",
   opens: "A partir das 18h", // TODO: confirmar dias e horários
@@ -34,14 +35,33 @@ export const orderLink = whatsappNumber
   ? `https://wa.me/${whatsappNumber}?text=${message}`
   : site.mapLink;
 
-// TODO: substituir pelos itens reais do cardápio (nomes, descrições, preços e fotos).
-// Só "Sobremesas" tem item confirmado: brownie com sorvete aparece nas fotos do perfil.
-export const menu = [
-  { title: "Burgers", text: "Os lanches da casa. Nomes, ingredientes e preços entram aqui." },
-  { title: "Combos", text: "Lanche com acompanhamento e bebida, para pedir de uma vez." },
-  { title: "Porções", text: "Os acompanhamentos que vão bem com o burger." },
-  { title: "Sobremesas", text: "Brownie com sorvete, para fechar o pedido." },
+// Cardápio do catálogo do WhatsApp Business (prints enviados pelo Hygor).
+// As descrições do catálogo aparecem cortadas: aqui fica só o que dá para ler.
+export type MenuItem = { flag: string; name: string; text: string; price: string; tag?: string };
+
+export const burgers: MenuItem[] = [
+  { flag: "🇧🇷", name: "Interlagos", text: "Hambúrguer artesanal de fraldinha com panceta, feito na churrasqueira.", price: "R$ 34,90", tag: "Fraldinha" },
+  { flag: "🇮🇹", name: "Monza", text: "Hambúrguer artesanal de linguiça toscana, 150 g, feito na churrasqueira.", price: "R$ 22,90" },
+  { flag: "🇫🇷", name: "Paris", text: "Cheeseburger artesanal de costela feito na churrasqueira, com picles e maionese de mostarda e mel.", price: "R$ 22,90" },
+  { flag: "🇩🇪", name: "Hockenheim", text: "Hambúrguer 100% carne de porco (eisbein com pernil), 150 g.", price: "R$ 22,90" },
+  { flag: "🇨🇳", name: "Xangai", text: "Hambúrguer artesanal de frango empanado no pão semi-italiano.", price: "R$ 22,90" },
+  { flag: "🇮🇹", name: "San Marino", text: "Hambúrguer de costela bovina com gorgonzola e rúcula.", price: "R$ 27,90", tag: "O famoso da casa" },
+  { flag: "🇺🇸", name: "Daytona", text: "Hambúrguer artesanal de costela bovina com cebola caramelizada e creme de cheddar.", price: "R$ 27,90" },
+  { flag: "🇦🇺", name: "Melbourne", text: "Hambúrguer de costela bovina, 150 g, com queijo, no pão australiano.", price: "R$ 27,90" },
+  { flag: "🇯🇵", name: "Suzuka", text: "Hambúrguer artesanal de shimeji, shitake e cogumelos paris.", price: "R$ 27,90" },
+  { flag: "🇨🇦", name: "Montreal", text: "Hambúrguer artesanal com duas carnes de costela de 150 g cada.", price: "R$ 38,90", tag: "Duplo" },
 ];
+
+export const extras: MenuItem[] = [
+  { flag: "🏁", name: "Combo 4 Amigos", text: "Quatro lanches para dividir com a turma.", price: "R$ 83,60" },
+  { flag: "🥤", name: "Guaraná Antarctica 2 L", text: "Para acompanhar o pedido.", price: "R$ 16,00" },
+  { flag: "🍫", name: "Brownie com sorvete", text: "Para fechar com sobremesa.", price: "Consulte" },
+];
+
+export const orderItemLink = (item: string) =>
+  whatsappNumber
+    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Olá! Vim pelo site e quero pedir: ${item}.`)}`
+    : site.mapLink;
 
 export const photos = [
   {

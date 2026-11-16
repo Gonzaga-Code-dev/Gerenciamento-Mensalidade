@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { menu, orderLink, photos, site, steps } from "@/content/site";
+import { burgers, extras, orderItemLink, orderLink, photos, site, steps } from "@/content/site";
 
 const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
@@ -47,7 +47,7 @@ const ghostButton =
 const highlights = [
   { value: site.rating.value, label: "Nota no Google" },
   { value: String(site.rating.count), label: "Avaliações" },
-  { value: "R$ 20–40", label: "Por pessoa" },
+  { value: "R$ 22,90", label: "Burgers a partir de" },
   { value: "18h", label: "Abre a partir de" },
 ];
 
@@ -98,12 +98,13 @@ export default function Home() {
         {/* 1. Hero */}
         <section className={`${container} grid items-center gap-10 pb-14 pt-10 sm:pt-14 lg:grid-cols-12 lg:gap-12 lg:pb-20`}>
           <div className="lg:col-span-6">
-            <Kicker>Hamburgueria · {site.address.district} · SP</Kicker>
+            <Kicker>{site.tagline} · {site.address.district} · SP</Kicker>
             <h1 className="mt-5 font-display text-[2.2rem] uppercase leading-[1.05] sm:text-6xl">
-              Burger de respeito <span className="text-mustard">na Zona Sul</span>
+              Uma volta ao mundo <span className="text-mustard">em burgers</span>
             </h1>
             <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted">
-              Nota 5,0 no Google com mais de 230 avaliações. Escolha o seu lanche e peça direto pelo WhatsApp.
+              Cada lanche leva o nome de um circuito famoso: Interlagos, Monza, Suzuka, Daytona. Nota 5,0 no Google
+              com mais de 230 avaliações. Escolha o seu e peça pelo WhatsApp.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <OrderButton>Pedir pelo WhatsApp</OrderButton>
@@ -133,7 +134,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-char/90 via-char/10 to-transparent" />
               <figcaption className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 rounded-2xl border border-line bg-char/80 px-4 py-3 backdrop-blur">
                 <span>
-                  <span className="block text-sm font-bold">Burger da casa</span>
+                  <span className="block text-sm font-bold">Hambúrguer artesanal</span>
                   <span className="block text-xs text-muted">Foto real do Racha Burger</span>
                 </span>
                 <span className="rounded-md bg-mustard px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-char">
@@ -204,29 +205,82 @@ export default function Home() {
                 <Kicker>Cardápio</Kicker>
               </div>
               <Title>
-                Escolha o seu <span className="text-mustard">e peça</span>
+                Escolha o <span className="text-mustard">seu circuito</span>
               </Title>
               <p className="mt-4 text-muted">
-                Os lanches, combos e preços do Racha entram aqui, com foto e descrição de cada item.
+                Toque em &quot;Pedir&quot; e o WhatsApp já abre com o nome do lanche.
               </p>
             </div>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {menu.map((m, i) => (
-                <article key={m.title} data-reveal className="flex flex-col rounded-2xl border border-line bg-char p-6">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-mustard">0{i + 1}</span>
-                  <h3 className="mt-3 font-display text-2xl uppercase">{m.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{m.text}</p>
-                  <a
-                    href={orderLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-mustard hover:underline"
-                  >
-                    Pedir {m.title.toLowerCase()} →
-                  </a>
-                </article>
+
+            <ul className="mt-12 grid gap-4 md:grid-cols-2">
+              {burgers.map((b) => (
+                <li
+                  key={b.name}
+                  data-reveal
+                  className="flex flex-col justify-between gap-5 rounded-2xl border border-line bg-char p-5 sm:flex-row sm:items-center sm:p-6"
+                >
+                  <div className="flex gap-4">
+                    <span className="text-3xl leading-none" aria-hidden="true">
+                      {b.flag}
+                    </span>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-display text-xl uppercase">{b.name}</h3>
+                        {b.tag && (
+                          <span className="rounded-md bg-mustard/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-mustard">
+                            {b.tag}
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted">{b.text}</p>
+                    </div>
+                  </div>
+                  <div className="flex shrink-0 items-center justify-between gap-4 sm:flex-col sm:items-end">
+                    <span className="font-display text-xl text-mustard">{b.price}</span>
+                    <a
+                      href={orderItemLink(b.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg border border-mustard/60 px-4 py-2 text-xs font-bold uppercase tracking-wide text-mustard transition-colors hover:bg-mustard hover:text-char"
+                    >
+                      Pedir
+                    </a>
+                  </div>
+                </li>
               ))}
-            </div>
+            </ul>
+
+            <ul className="mt-4 grid gap-4 md:grid-cols-3">
+              {extras.map((e, i) => (
+                <li
+                  key={e.name}
+                  data-reveal
+                  className={`flex flex-col rounded-2xl p-6 ${i === 0 ? "bg-mustard text-char" : "border border-line bg-char"}`}
+                >
+                  <span className="text-3xl leading-none" aria-hidden="true">
+                    {e.flag}
+                  </span>
+                  <h3 className="mt-4 font-display text-xl uppercase">{e.name}</h3>
+                  <p className={`mt-1.5 flex-1 text-sm leading-relaxed ${i === 0 ? "text-char/75" : "text-muted"}`}>{e.text}</p>
+                  <div className="mt-5 flex items-center justify-between">
+                    <span className={`font-display text-xl ${i === 0 ? "" : "text-mustard"}`}>{e.price}</span>
+                    <a
+                      href={orderItemLink(e.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
+                        i === 0
+                          ? "bg-char text-cream hover:bg-char-2"
+                          : "border border-mustard/60 text-mustard hover:bg-mustard hover:text-char"
+                      }`}
+                    >
+                      Pedir
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-center text-xs text-muted">Preços do catálogo do WhatsApp do Racha Burger.</p>
           </div>
         </section>
 

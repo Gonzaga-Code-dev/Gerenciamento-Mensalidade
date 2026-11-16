@@ -60,4 +60,4 @@ precisa e o Claude entrega o site pronto, revisado e publicado na branch.
 | `clinica-milena-couto` | Clínica Milena Couto (estética facial) | Landing page, prévia (noindex) | Descartada: cliente já tem site |
 | `marcela-santos-estetica` | MS Marcela Santos Estética e Saúde | Landing page, prévia (noindex) | Publicada em marcela-santos-estetica-navy.vercel.app, aguardando abordagem |
 | `exemplos-gonzaga-code` | Gonzaga Code (portfólio) | 3 exemplos fictícios: barbearia, nutricionista, confeitaria | Substituído: o portfólio publicado agora vem do repositório `Gonzaga-Code-dev/Exemplos` (Vite) |
-| `racha-burger` | Racha Burger (hamburgueria, Vila Santo Antônio) | Landing page, prévia (noindex) | Publicada em racha-burger.vercel.app (padrão All Play); falta cardápio |
+| `racha-burger` | Racha Burger (hamburgueria, Vila Santo Antônio) | Landing page, prévia (noindex) | Publicada em racha-burger.vercel.app (padrão All Play, cardápio real) |
