@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import Reveal from "./Reveal";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -48,9 +49,9 @@ export default function ExamplePage({ ex }: { ex: Example }) {
       {/* Faixa de exemplo */}
       <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-center gap-3 bg-[#111] px-4 py-[7px] text-[11px] text-white/80">
         <span className="truncate">Exemplo fictício · site criado pela Gonzaga Code</span>
-        <a href="./" className="shrink-0 underline underline-offset-2 hover:text-white">
+        <Link href="/" className="shrink-0 underline underline-offset-2 hover:text-white">
           Ver todos
-        </a>
+        </Link>
       </div>
 
       <header className="pt-[31px]">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { contact, examples } from "@/content/examples";
@@ -44,9 +45,9 @@ export default function Home() {
           {examples.map((ex) => {
             const t = ex.theme;
             return (
-              <a
+              <Link
                 key={ex.slug}
-                href={`/${ex.slug}`}
+                href={`/${ex.slug}/`}
                 className="group flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl p-7 transition-transform hover:-translate-y-1"
                 style={{ background: t.bg, color: t.text, border: `1px solid ${t.line}` }}
               >
@@ -74,7 +75,7 @@ export default function Home() {
                     Ver exemplo →
                   </span>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </section>
