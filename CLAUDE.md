@@ -58,3 +58,4 @@ precisa e o Claude entrega o site pronto, revisado e publicado na branch.
 | `dra-marcia-regina` | Dra. Márcia Regina (tricologista) | Landing page, prévia (noindex) | Aguardando pendências da cliente |
 | `estetica-marilia-ferrari` | Estética Marília Ferrari (estética facial e Pilates) | Landing page, prévia (noindex) | Publicada, aguardando abordagem |
 | `clinica-milena-couto` | Clínica Milena Couto (estética facial) | Landing page, prévia (noindex) | Descartada: cliente já tem site |
+| `marcela-santos-estetica` | MS Marcela Santos Estética e Saúde | Landing page, prévia (noindex) | Publicada em marcela-santos-estetica-navy.vercel.app, aguardando abordagem |

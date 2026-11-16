@@ -34,3 +34,4 @@ próprio.
 | [`dra-marcia-regina`](sites/dra-marcia-regina) | Dra. Márcia Regina | Landing page (prévia) |
 | [`estetica-marilia-ferrari`](sites/estetica-marilia-ferrari) | Estética Marília Ferrari | Landing page (prévia) |
 | [`clinica-milena-couto`](sites/clinica-milena-couto) | Clínica Milena Couto | Landing page (prévia) |
+| [`marcela-santos-estetica`](sites/marcela-santos-estetica) | MS Marcela Santos Estética e Saúde | Landing page (prévia) |
