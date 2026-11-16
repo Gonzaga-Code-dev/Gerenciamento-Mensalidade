@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Cada exemplo define estas variáveis no seu próprio contêiner. */
+:root {
+  --bg: #f6f4ef;
+  --surface: #ebe7de;
+  --line: #ddd7cb;
+  --text: #191814;
+  --muted: #625e55;
+  --accent: #191814;
+  --accent-ink: #ffffff;
+  --radius: 999px;
+  --font-h: Georgia, serif;
+  --font-b: system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-h: var(--font-h);
+  --font-b: var(--font-b);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.rounded-theme {
+  border-radius: var(--radius);
+}
+.rounded-card {
+  border-radius: min(var(--radius), 28px);
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Placeholder de foto no tom do exemplo */
+.placeholder {
+  background:
+    radial-gradient(60% 70% at 25% 25%, color-mix(in srgb, var(--surface) 70%, white) 0%, transparent 70%),
+    radial-gradient(55% 65% at 80% 80%, color-mix(in srgb, var(--accent) 35%, var(--surface)) 0%, transparent 70%),
+    var(--surface);
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
