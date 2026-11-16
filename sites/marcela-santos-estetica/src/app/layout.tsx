@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f3f7f6",
+  themeColor: "#f8f5f8",
 };
 
 const jsonLd = {
@@ -46,6 +46,7 @@ const jsonLd = {
     streetAddress: site.address.street,
     addressLocality: site.address.city,
     addressRegion: site.address.state,
+    postalCode: site.address.zip,
     addressCountry: "BR",
   },
 };

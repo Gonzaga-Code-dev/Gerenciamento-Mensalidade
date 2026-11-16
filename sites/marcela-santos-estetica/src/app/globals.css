@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --mist: #f3f7f6;
-  --foam: #e4eeec;
-  --line: #d5e2df;
-  --deep: #173f3b;
-  --deep-2: #1f4e4a;
-  --text: #1b2826;
-  --muted: #566764;
-  --aqua: #7fb7ae;
-  --aqua-soft: #cfe5e0;
+  --mist: #f8f5f8;
+  --foam: #efe7f0;
+  --line: #e3d8e5;
+  --deep: #3a2541;
+  --deep-2: #5b3e66;
+  --text: #241b27;
+  --muted: #66596a;
+  --aqua: #b79bc4;
+  --aqua-soft: #e7dcec;
 }
 
 @theme inline {
@@ -47,12 +47,12 @@ details > summary::-webkit-details-marker {
   display: none;
 }
 
-/* Placeholder de foto: água e luz */
+/* Placeholder de foto: lilás e luz */
 .water {
   background:
-    radial-gradient(60% 70% at 30% 25%, #eaf4f1 0%, transparent 70%),
-    radial-gradient(55% 65% at 75% 80%, #9cc8bf 0%, transparent 70%),
-    linear-gradient(150deg, #d9ebe7 0%, #b3d4cd 100%);
+    radial-gradient(60% 70% at 30% 25%, #f6eff7 0%, transparent 70%),
+    radial-gradient(55% 65% at 75% 80%, #c9aed3 0%, transparent 70%),
+    linear-gradient(150deg, #ebdfee 0%, #d6c2dd 100%);
 }
 
 .js [data-reveal] {

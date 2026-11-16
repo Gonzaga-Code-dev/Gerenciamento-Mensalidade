@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { faq, pillars, site } from "@/content/site";
+import { faq, pillars, services, site } from "@/content/site";
 
 const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
@@ -54,6 +54,9 @@ export default function Home() {
             </span>
           </a>
           <nav aria-label="Principal" className="hidden gap-8 text-sm text-muted md:flex">
+            <a href="#procedimentos" className="hover:text-text">
+              Procedimentos
+            </a>
             <a href="#atendimento" className="hover:text-text">
               Atendimento
             </a>
@@ -79,12 +82,13 @@ export default function Home() {
         {/* 1. Hero */}
         <section className={`${container} grid gap-8 pb-16 pt-8 sm:pt-14 lg:grid-cols-12 lg:gap-10 lg:pb-24`}>
           <div className="flex flex-col justify-center lg:col-span-7">
-            <Tag>Estética e saúde em São Mateus</Tag>
+            <Tag>Clínica de estética em São Mateus</Tag>
             <h1 className="mt-5 font-serif text-[3.2rem] leading-[0.98] tracking-tight text-balance sm:text-7xl lg:text-[5.6rem]">
               Cuidar de você, <em className="text-deep-2">com calma e critério</em>
             </h1>
             <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-muted">
-              Atendimento individual, com avaliação antes de cada cuidado e tempo para explicar cada etapa.
+              Limpeza de pele, microagulhamento, revitalização facial, massagem e depilação, com avaliação antes de
+              cada cuidado e tempo para explicar cada etapa.
             </p>
             <div className="mt-9">
               <CtaButton>Agendar pelo WhatsApp</CtaButton>
@@ -107,7 +111,36 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 2. Atendimento */}
+        {/* 2. Procedimentos */}
+        <section id="procedimentos" className="scroll-mt-10 pb-20 sm:pb-28">
+          <div className={container}>
+            <div data-reveal className="max-w-2xl">
+              <Tag>Procedimentos</Tag>
+              <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight sm:text-6xl">
+                Cuidados para o rosto, <em className="text-deep-2">o corpo e o bem-estar</em>
+              </h2>
+            </div>
+            <div className="mt-12 space-y-12">
+              {services.map((g) => (
+                <div key={g.group} data-reveal>
+                  <h3 className="border-b border-line pb-3 text-sm font-medium uppercase tracking-[0.16em] text-deep-2">
+                    {g.group}
+                  </h3>
+                  <ul className="mt-6 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+                    {g.items.map((it) => (
+                      <li key={it.title}>
+                        <p className="font-serif text-2xl">{it.title}</p>
+                        <p className="mt-1.5 leading-relaxed text-muted">{it.text}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Atendimento */}
         <section id="atendimento" className="scroll-mt-10 rounded-t-[2.5rem] bg-foam py-20 sm:py-28">
           <div className={container}>
             <div data-reveal className="max-w-2xl">
@@ -178,8 +211,13 @@ export default function Home() {
                 {site.address.street}
                 <br />
                 {site.address.district}, {site.address.city} – {site.address.state}
+                <br />
+                CEP {site.address.zip}
               </address>
-              <p className="mt-6 text-sm text-muted">Horários e agendamento pelo WhatsApp.</p>
+              <p className="mt-6 text-[15px]">
+                <span className="text-muted">Horário:</span> {site.hours}
+              </p>
+              <p className="mt-1 text-sm text-muted">Agendamento pelo WhatsApp.</p>
               <a
                 href={site.mapLink}
                 target="_blank"
