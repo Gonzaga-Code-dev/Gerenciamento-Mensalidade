@@ -41,43 +41,30 @@ export default function Home() {
           </p>
         </section>
 
-        <section className={`${container} grid gap-5 pb-20 md:grid-cols-3`}>
-          {examples.map((ex) => {
-            const t = ex.theme;
-            return (
-              <Link
-                key={ex.slug}
-                href={`/${ex.slug}/`}
-                className="group flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl p-7 transition-transform hover:-translate-y-1"
-                style={{ background: t.bg, color: t.text, border: `1px solid ${t.line}` }}
-              >
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.18em]" style={{ color: t.accent }}>
-                    {ex.nicho}
-                  </p>
-                  <p
-                    className={`mt-5 text-4xl leading-[1.02] ${t.uppercaseHeadings ? "uppercase" : ""}`}
-                    style={{ fontFamily: fonts[t.heading].style.fontFamily }}
-                  >
-                    {ex.name}
-                  </p>
-                  <p className="mt-3 text-sm" style={{ color: t.muted }}>
-                    {ex.kind}
-                  </p>
-                </div>
-                <div className="mt-10 flex items-center justify-between">
-                  <span className="flex gap-1.5">
-                    {[t.accent, t.surface, t.text].map((c) => (
-                      <span key={c} className="size-5 rounded-full" style={{ background: c, border: `1px solid ${t.line}` }} />
-                    ))}
+        <section className={`${container} pb-20`}>
+          <ul className="max-w-2xl divide-y divide-line border-y border-line">
+            {examples.map((ex) => (
+              <li key={ex.slug}>
+                <Link
+                  href={`/${ex.slug}/`}
+                  className="group flex min-h-16 items-center gap-4 py-4 transition-colors hover:text-muted"
+                >
+                  <span
+                    className="size-3 shrink-0 rounded-full"
+                    style={{ background: ex.theme.accent }}
+                    aria-hidden="true"
+                  />
+                  <span className="flex-1">
+                    <span className="block text-[17px] font-medium capitalize">{ex.nicho}</span>
+                    <span className="block text-sm text-muted">{ex.name}</span>
                   </span>
-                  <span className="text-sm font-medium" style={{ color: t.accent }}>
+                  <span className="text-sm text-muted transition-transform group-hover:translate-x-1">
                     Ver exemplo →
                   </span>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="border-t border-line py-16 sm:py-20">
