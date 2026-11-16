@@ -1,19 +1,22 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { menu, orderLink, site, steps } from "@/content/site";
+import { menu, orderLink, photos, site, steps } from "@/content/site";
 
 const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
-function OrderButton({ children, variant = "mustard" }: { children: ReactNode; variant?: "mustard" | "dark" }) {
+function OrderButton({ children, variant = "gold" }: { children: ReactNode; variant?: "gold" | "dark" }) {
+  const styles = {
+    gold: "bg-mustard text-char hover:bg-[#efc061]",
+    dark: "bg-char text-cream hover:bg-char-2",
+  }[variant];
   return (
     <a
       href={orderLink}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex min-h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-7 py-3.5 text-[15px] font-bold uppercase tracking-wide transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard ${
-        variant === "mustard" ? "bg-mustard text-char" : "bg-char text-cream"
-      }`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-xl px-6 py-3.5 text-sm font-bold uppercase tracking-wide transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mustard ${styles}`}
     >
       <WhatsAppIcon className="size-[18px]" />
       {children}
@@ -21,32 +24,32 @@ function OrderButton({ children, variant = "mustard" }: { children: ReactNode; v
   );
 }
 
-function BurgerArt({ className = "" }: { className?: string }) {
+function Kicker({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
   return (
-    <svg viewBox="0 0 400 320" className={className} role="img" aria-label="Ilustração de um hambúrguer">
-      <ellipse cx="200" cy="296" rx="150" ry="14" fill="#000" opacity=".35" />
-      <path d="M62 236h276c0 30-26 50-58 50H120c-32 0-58-20-58-50z" fill="#f2b33d" />
-      <path d="M58 214c40 14 72-10 104 4s60 14 92-2 56-10 88 0v14H58z" fill="#7cb342" />
-      <rect x="50" y="190" width="300" height="34" rx="17" fill="#5a2e1b" />
-      <path d="M58 186l26 22 22-22 26 22 22-22 26 22 22-22 26 22 22-22 26 22 22-22 26 22 22-22v-6H58z" fill="#ffd54a" />
-      <rect x="60" y="168" width="280" height="14" rx="7" fill="#d9412b" />
-      <path d="M60 160c0-70 62-112 140-112s140 42 140 112z" fill="#f2b33d" />
-      <path d="M90 140c8-40 50-70 110-70" stroke="#fff" strokeOpacity=".35" strokeWidth="8" strokeLinecap="round" fill="none" />
-      {[
-        [130, 92],
-        [170, 76],
-        [214, 80],
-        [256, 96],
-        [150, 118],
-        [196, 108],
-        [238, 122],
-        [284, 128],
-      ].map(([x, y]) => (
-        <ellipse key={`${x}-${y}`} cx={x} cy={y} rx="7" ry="4" fill="#fff6dc" transform={`rotate(-20 ${x} ${y})`} />
-      ))}
-    </svg>
+    <p
+      className={`flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] ${dark ? "text-char/70" : "text-mustard"}`}
+    >
+      <span className={`h-px w-8 ${dark ? "bg-char/40" : "bg-mustard/60"}`} aria-hidden="true" />
+      {children}
+    </p>
   );
 }
+
+function Title({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <h2 className={`mt-4 font-display text-[2rem] uppercase leading-[1.05] sm:text-[2.6rem] ${className}`}>{children}</h2>
+  );
+}
+
+const ghostButton =
+  "inline-flex min-h-12 items-center justify-center rounded-xl border border-cream/25 px-6 py-3.5 text-sm font-bold uppercase tracking-wide transition-colors hover:border-mustard hover:text-mustard";
+
+const highlights = [
+  { value: site.rating.value, label: "Nota no Google" },
+  { value: String(site.rating.count), label: "Avaliações" },
+  { value: "R$ 20–40", label: "Por pessoa" },
+  { value: "18h", label: "Abre a partir de" },
+];
 
 export default function Home() {
   const year = new Date().getFullYear();
@@ -58,17 +61,23 @@ export default function Home() {
         Prévia desenvolvida por Gonzaga Code para o {site.name}
       </div>
 
-      <header className="pt-[31px]">
-        <div className={`${container} flex h-20 items-center justify-between gap-6`}>
-          <a href="#inicio" className="font-display text-xl uppercase tracking-tight sm:text-2xl">
-            Racha <span className="text-mustard">Burger</span>
+      <header className="sticky top-[31px] z-40 mt-[31px] border-b border-line bg-char/90 backdrop-blur">
+        <div className={`${container} flex h-16 items-center justify-between gap-6 sm:h-20`}>
+          <a href="#inicio" className="flex items-center gap-3">
+            <span className="grid size-7 shrink-0 rotate-45 place-items-center border-2 border-mustard sm:size-10" aria-hidden="true">
+              <span className="-rotate-45 font-display text-[10px] text-mustard sm:text-sm">RB</span>
+            </span>
+            <span className="whitespace-nowrap font-display text-base uppercase tracking-wide text-mustard sm:text-xl">Racha Burger</span>
           </a>
-          <nav aria-label="Principal" className="hidden gap-8 text-sm font-semibold text-muted md:flex">
+          <nav aria-label="Principal" className="hidden gap-8 text-sm font-semibold text-muted lg:flex">
+            <a href="#fotos" className="hover:text-cream">
+              Fotos
+            </a>
             <a href="#cardapio" className="hover:text-cream">
               Cardápio
             </a>
-            <a href="#como-pedir" className="hover:text-cream">
-              Como pedir
+            <a href="#avaliacoes" className="hover:text-cream">
+              Avaliações
             </a>
             <a href="#onde" className="hover:text-cream">
               Onde estamos
@@ -78,7 +87,7 @@ export default function Home() {
             href={orderLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border-2 border-mustard px-4 py-2 text-xs font-bold uppercase tracking-wide text-mustard transition-colors hover:bg-mustard hover:text-char sm:text-sm"
+            className="shrink-0 whitespace-nowrap rounded-xl bg-mustard px-3 py-2 text-xs font-bold uppercase tracking-wide text-char sm:px-4 sm:py-2.5 sm:text-sm"
           >
             Pedir agora
           </a>
@@ -87,84 +96,182 @@ export default function Home() {
 
       <main id="inicio">
         {/* 1. Hero */}
-        <section className={`${container} grid items-center gap-10 pb-16 pt-8 sm:pt-12 lg:grid-cols-2 lg:pb-24`}>
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-char-2 px-4 py-2 text-sm font-semibold ring-1 ring-line">
-              <span className="text-mustard">★★★★★</span>
-              {site.rating.value} no Google · {site.rating.count} avaliações
-            </p>
-            <h1 className="mt-6 font-display text-[3rem] uppercase leading-[0.95] tracking-tight sm:text-7xl">
-              Lanche que <span className="text-mustard">racha</span> de bom
+        <section className={`${container} grid items-center gap-10 pb-14 pt-10 sm:pt-14 lg:grid-cols-12 lg:gap-12 lg:pb-20`}>
+          <div className="lg:col-span-6">
+            <Kicker>Hamburgueria · {site.address.district} · SP</Kicker>
+            <h1 className="mt-5 font-display text-[2.2rem] uppercase leading-[1.05] sm:text-6xl">
+              Burger de respeito <span className="text-mustard">na Zona Sul</span>
             </h1>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-muted">
-              Hambúrguer na Vila Santo Antônio, com nota 5,0 no Google. Escolha o seu e peça direto pelo WhatsApp.
+            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted">
+              Nota 5,0 no Google com mais de 230 avaliações. Escolha o seu lanche e peça direto pelo WhatsApp.
             </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <OrderButton>Pedir agora</OrderButton>
-              <a href="#cardapio" className="text-sm font-semibold text-cream underline decoration-mustard underline-offset-[6px]">
-                Ver o cardápio
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <OrderButton>Pedir pelo WhatsApp</OrderButton>
+              <a href="#cardapio" className={ghostButton}>
+                Ver cardápio
               </a>
             </div>
-            <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-              <li>{site.opens}</li>
-              <li>{site.priceRange}</li>
-              <li>{site.address.district}</li>
-            </ul>
+            <p className="mt-7 flex items-center gap-2 text-sm text-muted">
+              <span className="text-mustard">★★★★★</span>
+              <span>
+                <strong className="text-cream">{site.rating.value}</strong> no Google · {site.rating.count} avaliações
+              </span>
+            </p>
           </div>
-          <div className="relative">
-            <div className="absolute inset-6 rounded-full bg-ketchup/25 blur-3xl" aria-hidden="true" />
-            <BurgerArt className="relative mx-auto w-full max-w-md" />
+
+          <div className="lg:col-span-6">
+            <figure className="relative mx-auto max-w-md overflow-hidden rounded-3xl ring-1 ring-line lg:max-w-none">
+              <Image
+                src="/fotos/burger-mao.webp"
+                alt="Hambúrguer do Racha Burger com queijo, alface, tomate e molho, servido no papel da casa"
+                width={758}
+                height={1264}
+                priority
+                sizes="(min-width: 1024px) 520px, 90vw"
+                className="aspect-[4/5] w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-char/90 via-char/10 to-transparent" />
+              <figcaption className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 rounded-2xl border border-line bg-char/80 px-4 py-3 backdrop-blur">
+                <span>
+                  <span className="block text-sm font-bold">Burger da casa</span>
+                  <span className="block text-xs text-muted">Foto real do Racha Burger</span>
+                </span>
+                <span className="rounded-md bg-mustard px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-char">
+                  5,0 ★
+                </span>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
-        {/* Faixa da nota */}
-        <div className="overflow-hidden border-y border-line bg-ketchup py-4">
-          <p className="whitespace-nowrap text-center font-display text-lg uppercase tracking-wide text-cream sm:text-xl">
-            Nota {site.rating.value} no Google · {site.rating.count} avaliações · Vila Santo Antônio
-          </p>
-        </div>
+        {/* Destaques */}
+        <section className="border-y border-line bg-char-2">
+          <div className={`${container} grid grid-cols-2 lg:grid-cols-4`}>
+            {highlights.map((h, i) => (
+              <div
+                key={h.label}
+                className={`py-6 sm:py-8 ${i % 2 === 1 ? "pl-5 sm:pl-8" : ""} ${i > 0 ? "lg:border-l lg:border-line lg:pl-8" : ""} ${i > 1 ? "border-t border-line lg:border-t-0" : ""}`}
+              >
+                <p className="font-display text-3xl text-mustard sm:text-4xl">{h.value}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted">{h.label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        {/* 2. Cardápio */}
-        <section id="cardapio" className="scroll-mt-10 py-20 sm:py-28">
+        {/* 2. Fotos */}
+        <section id="fotos" className="scroll-mt-28 py-20 sm:py-24">
           <div className={container}>
-            <div data-reveal className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <h2 className="font-display text-4xl uppercase tracking-tight sm:text-5xl">
-                O <span className="text-mustard">cardápio</span>
-              </h2>
+            <div data-reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <Kicker>Fotos reais</Kicker>
+                <Title>
+                  Do jeito que <span className="text-mustard">chega na mesa</span>
+                </Title>
+              </div>
               <p className="max-w-sm text-sm text-muted">
-                Os lanches, combos e preços do Racha entram aqui, com foto de cada um.
+                Imagens do perfil do Racha Burger. Na versão final, entram as fotos de cada lanche do cardápio.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-5 md:grid-cols-2">
+              {photos.map((p) => (
+                <figure key={p.src} data-reveal className="group overflow-hidden rounded-3xl bg-char-2 ring-1 ring-line">
+                  <div className="overflow-hidden">
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      width={p.w}
+                      height={p.h}
+                      sizes="(min-width: 768px) 540px, 90vw"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <figcaption className="flex items-center justify-between px-5 py-4">
+                    <span className="font-display text-lg uppercase">{p.caption}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">Foto real</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Cardápio */}
+        <section id="cardapio" className="scroll-mt-28 border-t border-line bg-char-2 py-20 sm:py-24">
+          <div className={container}>
+            <div data-reveal className="mx-auto max-w-2xl text-center">
+              <div className="flex justify-center">
+                <Kicker>Cardápio</Kicker>
+              </div>
+              <Title>
+                Escolha o seu <span className="text-mustard">e peça</span>
+              </Title>
+              <p className="mt-4 text-muted">
+                Os lanches, combos e preços do Racha entram aqui, com foto e descrição de cada item.
               </p>
             </div>
             <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {menu.map((m, i) => (
-                <article key={m.title} data-reveal className="flex flex-col rounded-3xl bg-char-2 p-6 ring-1 ring-line">
-                  <div className="grid aspect-[4/3] place-items-center rounded-2xl bg-char ring-1 ring-line">
-                    <span className="font-display text-5xl text-line">0{i + 1}</span>
-                  </div>
-                  <h3 className="mt-5 font-display text-2xl uppercase">{m.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{m.text}</p>
+                <article key={m.title} data-reveal className="flex flex-col rounded-2xl border border-line bg-char p-6">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-mustard">0{i + 1}</span>
+                  <h3 className="mt-3 font-display text-2xl uppercase">{m.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{m.text}</p>
+                  <a
+                    href={orderLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-mustard hover:underline"
+                  >
+                    Pedir {m.title.toLowerCase()} →
+                  </a>
                 </article>
               ))}
-            </div>
-            <div data-reveal className="mt-10 flex justify-center">
-              <OrderButton>Fazer meu pedido</OrderButton>
             </div>
           </div>
         </section>
 
-        {/* 3. Como pedir */}
-        <section id="como-pedir" className="scroll-mt-10 bg-mustard py-20 text-char sm:py-24">
+        {/* 4. Avaliações */}
+        <section id="avaliacoes" className="scroll-mt-28 py-20 sm:py-24">
+          <div className={`${container} grid items-center gap-10 lg:grid-cols-12`}>
+            <div data-reveal className="lg:col-span-5">
+              <Kicker>Avaliações</Kicker>
+              <Title>
+                Quem prova, <span className="text-mustard">aprova</span>
+              </Title>
+              <p className="mt-5 max-w-md leading-relaxed text-muted">
+                São {site.rating.count} avaliações no Google e nota máxima. Veja o que os clientes dizem direto no
+                perfil.
+              </p>
+              <a href={site.mapLink} target="_blank" rel="noopener noreferrer" className={`mt-8 ${ghostButton}`}>
+                Ver avaliações no Google
+              </a>
+            </div>
+            <div data-reveal className="lg:col-span-7">
+              <div className="rounded-3xl border border-line bg-char-2 p-8 text-center sm:p-12">
+                <p className="font-display text-7xl text-mustard sm:text-8xl">{site.rating.value}</p>
+                <p className="mt-3 text-2xl tracking-[0.3em] text-mustard" aria-hidden="true">
+                  ★★★★★
+                </p>
+                <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-muted">
+                  {site.rating.count} avaliações no Google
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Como pedir */}
+        <section className="bg-mustard py-20 text-char sm:py-24">
           <div className={container}>
-            <h2 data-reveal className="font-display text-4xl uppercase tracking-tight sm:text-5xl">
-              Como pedir
-            </h2>
-            <ol className="mt-12 grid gap-6 md:grid-cols-3">
+            <div data-reveal>
+              <Kicker dark>Como pedir</Kicker>
+              <Title>Três passos e está pedido</Title>
+            </div>
+            <ol className="mt-12 grid gap-5 md:grid-cols-3">
               {steps.map((s) => (
-                <li key={s.n} data-reveal className="rounded-3xl bg-char p-7 text-cream">
-                  <span className="grid size-11 place-items-center rounded-full bg-ketchup font-display text-lg">
-                    {s.n}
-                  </span>
-                  <h3 className="mt-5 font-display text-xl uppercase">{s.title}</h3>
+                <li key={s.n} data-reveal className="rounded-2xl bg-char p-7 text-cream">
+                  <span className="font-display text-3xl text-mustard">0{s.n}</span>
+                  <h3 className="mt-3 font-display text-xl uppercase">{s.title}</h3>
                   <p className="mt-2 leading-relaxed text-muted">{s.text}</p>
                 </li>
               ))}
@@ -172,13 +279,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. Onde estamos */}
-        <section id="onde" className="scroll-mt-10 py-20 sm:py-28">
-          <div className={`${container} grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-14`}>
-            <div data-reveal>
-              <h2 className="font-display text-4xl uppercase tracking-tight sm:text-5xl">
-                Onde <span className="text-mustard">estamos</span>
-              </h2>
+        {/* 6. Onde estamos */}
+        <section id="onde" className="scroll-mt-28 py-20 sm:py-24">
+          <div className={`${container} grid gap-10 lg:grid-cols-12 lg:gap-12`}>
+            <div data-reveal className="lg:col-span-5">
+              <Kicker>Onde estamos</Kicker>
+              <Title>
+                Vila <span className="text-mustard">Santo Antônio</span>
+              </Title>
               <address className="mt-8 text-lg not-italic leading-relaxed">
                 {site.address.street}
                 <br />
@@ -186,49 +294,58 @@ export default function Home() {
                 <br />
                 CEP {site.address.zip}
               </address>
-              <p className="mt-6 text-muted">{site.opens}</p>
-              <a
-                href={site.mapLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 inline-flex min-h-12 items-center rounded-full border-2 border-cream/30 px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors hover:border-mustard hover:text-mustard"
-              >
-                Como chegar
-              </a>
+              <dl className="mt-6 space-y-2 text-sm">
+                <div className="flex gap-3">
+                  <dt className="w-20 text-muted">Horário</dt>
+                  <dd>{site.opens}</dd>
+                </div>
+                <div className="flex gap-3">
+                  <dt className="w-20 text-muted">WhatsApp</dt>
+                  <dd>{site.phone}</dd>
+                </div>
+              </dl>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <OrderButton>Pedir agora</OrderButton>
+                <a href={site.mapLink} target="_blank" rel="noopener noreferrer" className={ghostButton}>
+                  Como chegar
+                </a>
+              </div>
             </div>
-            <div data-reveal className="overflow-hidden rounded-3xl bg-char-2 ring-1 ring-line">
+            <div data-reveal className="overflow-hidden rounded-3xl bg-char-2 ring-1 ring-line lg:col-span-7">
               <iframe
                 src={site.mapEmbed}
                 title={`Mapa: ${site.name}, ${site.address.street}`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="block h-80 w-full sm:h-full sm:min-h-[400px]"
+                className="block h-80 w-full sm:h-full sm:min-h-[420px]"
               />
             </div>
           </div>
         </section>
 
-        {/* 5. CTA final */}
-        <section className={`${container} pb-20 sm:pb-28`}>
-          <div data-reveal className="rounded-[2rem] bg-ketchup px-6 py-14 text-center sm:py-20">
-            <h2 className="mx-auto max-w-2xl font-display text-4xl uppercase leading-tight tracking-tight sm:text-6xl">
-              Bateu a fome?
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-cream">Escolha o seu lanche e peça agora pelo WhatsApp.</p>
-            <div className="mt-9">
-              <OrderButton variant="dark">Pedir pelo WhatsApp</OrderButton>
+        {/* 7. CTA final */}
+        <section className={`${container} pb-20 sm:pb-24`}>
+          <div
+            data-reveal
+            className="flex flex-col gap-8 rounded-3xl bg-ketchup px-6 py-12 sm:px-12 sm:py-16 lg:flex-row lg:items-center lg:justify-between"
+          >
+            <div>
+              <h2 className="font-display text-[2rem] uppercase leading-tight sm:text-5xl">Bateu a fome?</h2>
+              <p className="mt-3 max-w-md text-cream">Escolha o seu lanche e peça agora pelo WhatsApp.</p>
             </div>
+            <OrderButton variant="dark">Pedir pelo WhatsApp</OrderButton>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-line pb-28 pt-10 text-sm text-muted md:pb-10">
-        <div className={`${container} flex flex-col gap-3 sm:flex-row sm:justify-between`}>
+      <footer className="border-t border-line pb-28 pt-12 text-sm text-muted md:pb-12">
+        <div className={`${container} flex flex-col gap-6 sm:flex-row sm:justify-between`}>
           <div>
-            <p className="font-display text-lg uppercase text-cream">{site.name}</p>
-            <p className="mt-1">
+            <p className="font-display text-xl uppercase text-mustard">{site.name}</p>
+            <p className="mt-2">
               {site.address.street} · {site.address.district}, {site.address.city} – {site.address.state}
             </p>
+            <p>WhatsApp {site.phone}</p>
           </div>
           <p className="text-xs sm:text-right">
             © {year} {site.name}

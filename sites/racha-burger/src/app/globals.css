@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --char: #15110e;
-  --char-2: #211a15;
-  --line: #3a2f27;
+  --char: #12100e;
+  --char-2: #1d1915;
+  --line: #352d24;
   --cream: #f6efe3;
   --muted: #b9ab98;
-  --mustard: #f2b33d;
-  --ketchup: #b9341e;
+  --mustard: #e3b04b;
+  --ketchup: #a4472b;
 }
 
 @theme inline {
@@ -19,7 +19,7 @@
   --color-mustard: var(--mustard);
   --color-ketchup: var(--ketchup);
   --font-sans: var(--font-archivo), system-ui, sans-serif;
-  --font-display: var(--font-archivo-black), Impact, sans-serif;
+  --font-display: var(--font-alfa), Georgia, serif;
 }
 
 html {

@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Archivo_Black } from "next/font/google";
+import { Alfa_Slab_One, Archivo } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
 
 const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], display: "swap" });
-const archivoBlack = Archivo_Black({
-  variable: "--font-archivo-black",
+const alfa = Alfa_Slab_One({
+  variable: "--font-alfa",
   subsets: ["latin"],
   weight: "400",
   display: "swap",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#15110e",
+  themeColor: "#12100e",
 };
 
 const jsonLd = {
@@ -40,6 +40,8 @@ const jsonLd = {
   name: site.name,
   servesCuisine: "Hambúrguer",
   priceRange: "R$ 20–40",
+  telephone: "+55-11-98927-7880",
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "231" },
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
@@ -52,7 +54,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${archivo.variable} ${archivoBlack.variable} antialiased`}>
+    <html lang="pt-BR" className={`${archivo.variable} ${alfa.variable} antialiased`}>
       <body className="min-h-screen font-sans">
         {children}
         <script

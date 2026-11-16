@@ -8,13 +8,15 @@
 - **Endereço:** R. Mário de Azevedo, 383 – Vila Santo Antônio, São Paulo – SP, 04811-100
 - **Horário:** abre às 18h (o print mostrava "abre qua. às 18:00")
 - **Perfil:** sem link de site; tem botão de WhatsApp
+- **WhatsApp:** (11) 98927-7880
+- **Fotos:** 3 fotos do perfil (burger na mão, burgers na mesa, brownie com sorvete com o logo no barril)
 
 ## Identidade
-Carvão #15110E, mostarda #F2B33D, vermelho #B9341E, creme #F6EFE3.
-Archivo Black (títulos, caixa alta) + Archivo (corpo). Hambúrguer ilustrado em SVG no lugar da foto.
+Tirada do logo real (dourado sobre preto, barril, parede de tijolo): carvão #12100E, dourado #E3B04B,
+tijolo #A4472B, creme #F6EFE3. Alfa Slab One (títulos, próxima do logo) + Archivo (corpo).
+Padrão de acabamento: igual à prévia da All Play (fotos reais, faixa de destaques, avaliações).
 
 ## Pendências
-- [ ] Número do WhatsApp (até lá, os botões levam ao perfil do Maps)
 - [ ] Cardápio real: itens, descrições, preços e fotos
 - [ ] Dias e horários de funcionamento
-- [ ] Logo e fotos dos lanches
+- [ ] Fotos em boa resolução (as do perfil são pequenas) e logo em arquivo

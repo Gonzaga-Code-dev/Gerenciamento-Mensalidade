@@ -4,8 +4,8 @@
 
 const mapsQuery = encodeURIComponent("Racha Burger, R. Mário de Azevedo, 383 - Vila Santo Antônio, São Paulo - SP, 04811-100");
 
-// TODO: número do WhatsApp (botão "WhatsApp" do perfil no Maps).
-const whatsappNumber = "";
+// Número do botão de WhatsApp do perfil no Maps (enviado pelo Hygor).
+const whatsappNumber = "5511989277880";
 const message = encodeURIComponent("Olá! Vim pelo site e quero fazer um pedido.");
 
 export const site = {
@@ -26,6 +26,7 @@ export const site = {
   mapLink: `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`,
   mapEmbed: `https://www.google.com/maps?q=${mapsQuery}&output=embed`,
   whatsappNumber,
+  phone: "(11) 98927-7880",
 };
 
 // Enquanto não houver número, o pedido leva ao perfil do Maps (que tem o botão de WhatsApp).
@@ -34,11 +35,29 @@ export const orderLink = whatsappNumber
   : site.mapLink;
 
 // TODO: substituir pelos itens reais do cardápio (nomes, descrições, preços e fotos).
+// Só "Sobremesas" tem item confirmado: brownie com sorvete aparece nas fotos do perfil.
 export const menu = [
-  { title: "Burgers", text: "Os lanches da casa, com o pão, a carne e os molhos do Racha." },
-  { title: "Combos", text: "Lanche, batata e bebida juntos, para pedir sem pensar." },
-  { title: "Porções", text: "Batata, onion rings e o que mais acompanha bem." },
-  { title: "Bebidas", text: "Refrigerantes, sucos e o que gela o pedido." },
+  { title: "Burgers", text: "Os lanches da casa. Nomes, ingredientes e preços entram aqui." },
+  { title: "Combos", text: "Lanche com acompanhamento e bebida, para pedir de uma vez." },
+  { title: "Porções", text: "Os acompanhamentos que vão bem com o burger." },
+  { title: "Sobremesas", text: "Brownie com sorvete, para fechar o pedido." },
+];
+
+export const photos = [
+  {
+    src: "/fotos/burgers-mesa.webp",
+    alt: "Três hambúrgueres do Racha Burger servidos na mesa",
+    caption: "Burgers da casa",
+    w: 758,
+    h: 758,
+  },
+  {
+    src: "/fotos/sobremesas-logo.webp",
+    alt: "Brownies com sorvete em frente ao logo do Racha Burger, num barril na parede de tijolos",
+    caption: "Brownie com sorvete",
+    w: 822,
+    h: 1096,
+  },
 ];
 
 export const steps = [
