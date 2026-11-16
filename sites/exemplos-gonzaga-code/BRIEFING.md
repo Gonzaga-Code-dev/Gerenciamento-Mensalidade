@@ -1,3 +1,6 @@
+> **Substituído.** O portfólio publicado em exemplos-gonzaga-code.vercel.app agora é o
+> projeto do repositório `Gonzaga-Code-dev/Exemplos`. Esta pasta fica como histórico.
+
 # Briefing: Exemplos Gonzaga Code
 
 **Tipo:** portfólio de exemplos com negócios FICTÍCIOS (noindex), para o Hygor
