@@ -8,7 +8,7 @@ export const site = {
   description:
     "Landing pages e sites sob medida para pequenas empresas e novos negócios. Rápidos, bem posicionados no Google e pensados para gerar clientes.",
   // Número no formato internacional, só dígitos (55 + DDD + número).
-  whatsapp: "5500000000000", // TODO: trocar pelo seu número
+  whatsapp: "5511982627309",
   instagram: "hygorgonzaga", // TODO: confirmar o @
   city: "Atendimento em todo o Brasil",
 };

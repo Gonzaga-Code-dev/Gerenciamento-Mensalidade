@@ -10,4 +10,4 @@ mostrar na abordagem.
 - Todos os botões de WhatsApp levam ao Hygor com "Vi o exemplo de site de [nicho]...".
 
 ## Pendências
-- [ ] Número de WhatsApp do Hygor (`contact.whatsapp` em `src/content/examples.ts`)
+- [x] WhatsApp do Hygor: (11) 98262-7309

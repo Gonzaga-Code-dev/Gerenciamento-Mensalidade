@@ -5,8 +5,7 @@ import type { FontKey } from "./fonts";
 // avaliações, depoimentos ou números inventados.
 
 export const contact = {
-  // TODO: número do Hygor (55 + DDD + número, só dígitos)
-  whatsapp: "5500000000000",
+  whatsapp: "5511982627309",
   brand: "Gonzaga Code",
 };
 
