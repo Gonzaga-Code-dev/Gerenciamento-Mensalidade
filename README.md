@@ -20,6 +20,11 @@ WhatsApp). O Claude cria `sites/<slug>`, preenche o `BRIEFING.md`, constrói o
 site, valida no celular e no desktop e faz o commit. O fluxo completo está em
 [`CLAUDE.md`](CLAUDE.md).
 
+## Prompts de prévia por nicho
+
+Modelos prontos para pedir prévias, um por nicho, em
+[`prompts/previas-por-nicho.md`](prompts/previas-por-nicho.md).
+
 ## Deploy na Vercel
 
 Para cada site: **Add New → Project**, escolha este repositório e defina o
