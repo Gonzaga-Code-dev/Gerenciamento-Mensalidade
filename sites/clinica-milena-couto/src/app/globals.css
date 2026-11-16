@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #f7f4ef;
+  --paper: #efe9e0;
+  --line: #e2dacd;
+  --ink: #17181c;
+  --ink-soft: #24262c;
+  --muted: #64605a;
+  --champagne: #c4a77d;
+  --champagne-deep: #8c6d43;
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-champagne: var(--champagne);
+  --color-champagne-deep: var(--champagne-deep);
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-serif: var(--font-bodoni), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--champagne);
+  color: var(--ink);
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Placeholder de foto: seda escura com brilho champanhe */
+.silk {
+  background:
+    radial-gradient(70% 60% at 70% 30%, rgba(196, 167, 125, 0.35) 0%, transparent 70%),
+    radial-gradient(60% 60% at 20% 80%, rgba(196, 167, 125, 0.18) 0%, transparent 70%),
+    linear-gradient(160deg, #2a2b31 0%, #1b1c21 100%);
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

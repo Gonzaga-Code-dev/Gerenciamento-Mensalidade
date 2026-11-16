@@ -33,3 +33,4 @@ próprio.
 | [`hygor-gonzaga`](sites/hygor-gonzaga) | Hygor Gonzaga | Site do serviço |
 | [`dra-marcia-regina`](sites/dra-marcia-regina) | Dra. Márcia Regina | Landing page (prévia) |
 | [`estetica-marilia-ferrari`](sites/estetica-marilia-ferrari) | Estética Marília Ferrari | Landing page (prévia) |
+| [`clinica-milena-couto`](sites/clinica-milena-couto) | Clínica Milena Couto | Landing page (prévia) |

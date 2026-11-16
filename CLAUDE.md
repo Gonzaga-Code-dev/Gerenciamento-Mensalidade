@@ -57,3 +57,4 @@ precisa e o Claude entrega o site pronto, revisado e publicado na branch.
 | `hygor-gonzaga` | Hygor Gonzaga (próprio) | Site do serviço | Revisar `TODO`s |
 | `dra-marcia-regina` | Dra. Márcia Regina (tricologista) | Landing page, prévia (noindex) | Aguardando pendências da cliente |
 | `estetica-marilia-ferrari` | Estética Marília Ferrari (estética facial e Pilates) | Landing page, prévia (noindex) | Publicada, aguardando abordagem |
+| `clinica-milena-couto` | Clínica Milena Couto (estética facial) | Landing page, prévia (noindex) | Publicada, aguardando abordagem |
